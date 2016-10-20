@@ -22,16 +22,11 @@ static VideoDownManager *_shareDownManager;
     return _shareDownManager;
 }
 
-- (NSString *)getDocumentPath {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    return documentsDirectory;
-}
 
 - (void)startVideoDownloadingFromURL:(NSURL *)url {
     [[UIApplication sharedApplication].keyWindow makeToast:[NSString stringWithFormat:@"start downloading"] duration:2.f position:CSToastPositionBottom];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    NSString *fullPath = [[self getDocumentPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.tmp",[url.absoluteString stringByDeletingPathExtension].lastPathComponent]];
+    NSString *fullPath = [getVideoPath() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.tmp",randomFileName()]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSURLSessionDownloadTask *task = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
         NSLog(@"progress:%f",downloadProgress.fractionCompleted);
@@ -70,6 +65,11 @@ static VideoDownManager *_shareDownManager;
             [[UIApplication sharedApplication].keyWindow makeToast:[NSString stringWithFormat:@"unknown file format with MIME:%@",mime] duration:2.f position:CSToastPositionBottom];
         }
         
+        if (filePath == nil) {
+            NSLog(@"downoad fail");
+            return;
+        }
+        
         NSURL *targetUrl = [[filePath URLByDeletingPathExtension] URLByAppendingPathExtension:extension];
         [[NSFileManager defaultManager] moveItemAtURL:filePath toURL:targetUrl error:nil];
         
@@ -82,6 +82,7 @@ static VideoDownManager *_shareDownManager;
         }
     }];
     [task resume];
+    
 }
 
 @end

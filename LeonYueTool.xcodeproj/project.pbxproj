@@ -34,6 +34,8 @@
 		8DDBFD0D1DB85AAD00F186B0 /* utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBFD0B1DB85AAD00F186B0 /* utility.m */; };
 		8DDBFD0E1DB85AAD00F186B0 /* utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBFD0B1DB85AAD00F186B0 /* utility.m */; };
 		8DDBFD0F1DB85AAD00F186B0 /* utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBFD0B1DB85AAD00F186B0 /* utility.m */; };
+		8DDBFD131DB8653D00F186B0 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBFD121DB8653D00F186B0 /* DownloadsViewController.m */; };
+		8DDBFD161DB865BC00F186B0 /* VideoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBFD151DB865BC00F186B0 /* VideoTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +116,10 @@
 		8DDBFD041DB85A6300F186B0 /* LeonYueTool.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeonYueTool.pch; sourceTree = "<group>"; };
 		8DDBFD0B1DB85AAD00F186B0 /* utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = utility.m; sourceTree = "<group>"; };
 		8DDBFD101DB85ABF00F186B0 /* utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility.h; sourceTree = "<group>"; };
+		8DDBFD111DB8653D00F186B0 /* DownloadsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadsViewController.h; sourceTree = "<group>"; };
+		8DDBFD121DB8653D00F186B0 /* DownloadsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadsViewController.m; sourceTree = "<group>"; };
+		8DDBFD141DB865BC00F186B0 /* VideoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoTableViewCell.h; sourceTree = "<group>"; };
+		8DDBFD151DB865BC00F186B0 /* VideoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoTableViewCell.m; sourceTree = "<group>"; };
 		DC3D813429A8C8E54E99CD1D /* Pods-LeonYueTool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeonYueTool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeonYueTool/Pods-LeonYueTool.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,6 +193,10 @@
 				8DACFF751D93779A00FF8FEC /* ViewController.m */,
 				8D7DF1541DB747DB008D3D4C /* VideoDownManager.h */,
 				8D7DF1551DB747DB008D3D4C /* VideoDownManager.m */,
+				8DDBFD111DB8653D00F186B0 /* DownloadsViewController.h */,
+				8DDBFD121DB8653D00F186B0 /* DownloadsViewController.m */,
+				8DDBFD141DB865BC00F186B0 /* VideoTableViewCell.h */,
+				8DDBFD151DB865BC00F186B0 /* VideoTableViewCell.m */,
 				8DACFF771D93779A00FF8FEC /* Main.storyboard */,
 				8DACFF7A1D93779A00FF8FEC /* Assets.xcassets */,
 				8DACFF7C1D93779A00FF8FEC /* LaunchScreen.storyboard */,
@@ -484,7 +494,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DDBFD0C1DB85AAD00F186B0 /* utility.m in Sources */,
+				8DDBFD161DB865BC00F186B0 /* VideoTableViewCell.m in Sources */,
 				8DACFF761D93779A00FF8FEC /* ViewController.m in Sources */,
+				8DDBFD131DB8653D00F186B0 /* DownloadsViewController.m in Sources */,
 				8DACFF731D93779A00FF8FEC /* AppDelegate.m in Sources */,
 				8DACFF701D93779A00FF8FEC /* main.m in Sources */,
 				8D7DF1561DB747DB008D3D4C /* VideoDownManager.m in Sources */,
