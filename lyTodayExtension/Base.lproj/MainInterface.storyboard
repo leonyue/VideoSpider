@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="T5e-Wg-s2W">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Ly Today Collection View Controller-->
+        <scene sceneID="MTm-QL-u6H">
+            <objects>
+                <collectionViewController id="T5e-Wg-s2W" customClass="LyTodayCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="qNb-SL-v9N">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="0.5" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TFe-WL-XxN">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell0" id="lq4-JO-yhy">
+                                <rect key="frame" x="10" y="25" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="裤子" translatesAutoresizingMaskIntoConstraints="NO" id="0ZD-VN-7bS"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="打开网址" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tju-4o-edt">
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <color key="backgroundColor" red="0.61084312080000003" green="1" blue="0.40381187079999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="tju-4o-edt" firstAttribute="leading" secondItem="lq4-JO-yhy" secondAttribute="leading" id="6DG-nf-Jgg"/>
+                                    <constraint firstItem="0ZD-VN-7bS" firstAttribute="centerX" secondItem="lq4-JO-yhy" secondAttribute="centerX" id="R4v-s6-9eb"/>
+                                    <constraint firstItem="0ZD-VN-7bS" firstAttribute="height" secondItem="lq4-JO-yhy" secondAttribute="height" multiplier="2:3" id="V6Y-id-akg"/>
+                                    <constraint firstItem="0ZD-VN-7bS" firstAttribute="centerY" secondItem="lq4-JO-yhy" secondAttribute="centerY" constant="-10" id="Z0Y-cr-3gG"/>
+                                    <constraint firstAttribute="bottom" secondItem="tju-4o-edt" secondAttribute="bottom" id="aNg-h5-iIz"/>
+                                    <constraint firstItem="tju-4o-edt" firstAttribute="top" secondItem="0ZD-VN-7bS" secondAttribute="bottom" id="kJh-bH-ql6"/>
+                                    <constraint firstAttribute="trailing" secondItem="tju-4o-edt" secondAttribute="trailing" id="pWP-SY-jiH"/>
+                                    <constraint firstItem="0ZD-VN-7bS" firstAttribute="width" secondItem="lq4-JO-yhy" secondAttribute="width" multiplier="2:3" id="vfA-Ap-MtX"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell1" id="4CA-zC-6sh">
+                                <rect key="frame" x="70" y="25" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="短裤" translatesAutoresizingMaskIntoConstraints="NO" id="kgT-d7-nEW"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="进App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="06V-gN-a3h">
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <color key="backgroundColor" red="0.61084312080000003" green="1" blue="0.40381187079999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="06V-gN-a3h" secondAttribute="bottom" id="8KL-9n-YYk"/>
+                                    <constraint firstItem="kgT-d7-nEW" firstAttribute="height" secondItem="4CA-zC-6sh" secondAttribute="height" multiplier="2:3" id="A25-n7-rsU"/>
+                                    <constraint firstItem="kgT-d7-nEW" firstAttribute="centerX" secondItem="4CA-zC-6sh" secondAttribute="centerX" id="Gag-BC-PJg"/>
+                                    <constraint firstItem="kgT-d7-nEW" firstAttribute="width" secondItem="4CA-zC-6sh" secondAttribute="width" multiplier="2:3" id="HQu-cA-Xqg"/>
+                                    <constraint firstItem="kgT-d7-nEW" firstAttribute="centerY" secondItem="4CA-zC-6sh" secondAttribute="centerY" constant="-10" id="VGP-Gs-bXq"/>
+                                    <constraint firstItem="06V-gN-a3h" firstAttribute="top" secondItem="kgT-d7-nEW" secondAttribute="bottom" id="Yew-86-Wau"/>
+                                    <constraint firstItem="06V-gN-a3h" firstAttribute="leading" secondItem="4CA-zC-6sh" secondAttribute="leading" id="aDx-wl-nyp"/>
+                                    <constraint firstAttribute="trailing" secondItem="06V-gN-a3h" secondAttribute="trailing" id="yiu-hV-t0D"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell2" id="8Um-1H-u78">
+                                <rect key="frame" x="130" y="25" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="纸尿裤" translatesAutoresizingMaskIntoConstraints="NO" id="ITg-gB-uQ2"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="纸尿裤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbL-TJ-yAz">
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <color key="backgroundColor" red="0.61084312080000003" green="1" blue="0.40381187079999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="ITg-gB-uQ2" firstAttribute="centerY" secondItem="8Um-1H-u78" secondAttribute="centerY" constant="-10" id="AmA-7w-MQ9"/>
+                                    <constraint firstAttribute="bottom" secondItem="dbL-TJ-yAz" secondAttribute="bottom" id="GLP-47-7j7"/>
+                                    <constraint firstItem="ITg-gB-uQ2" firstAttribute="width" secondItem="8Um-1H-u78" secondAttribute="width" multiplier="2:3" id="JXH-ss-KLi"/>
+                                    <constraint firstItem="ITg-gB-uQ2" firstAttribute="height" secondItem="8Um-1H-u78" secondAttribute="height" multiplier="2:3" id="MBg-RS-t9p"/>
+                                    <constraint firstItem="dbL-TJ-yAz" firstAttribute="top" secondItem="ITg-gB-uQ2" secondAttribute="bottom" id="Z40-ax-9HE"/>
+                                    <constraint firstAttribute="trailing" secondItem="dbL-TJ-yAz" secondAttribute="trailing" id="bka-89-bT0"/>
+                                    <constraint firstItem="ITg-gB-uQ2" firstAttribute="centerX" secondItem="8Um-1H-u78" secondAttribute="centerX" id="jP9-8p-uXb"/>
+                                    <constraint firstItem="dbL-TJ-yAz" firstAttribute="leading" secondItem="8Um-1H-u78" secondAttribute="leading" id="w9j-yu-bfh"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell3" id="8Td-6I-mYe">
+                                <rect key="frame" x="190" y="25" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="内裤" translatesAutoresizingMaskIntoConstraints="NO" id="ps5-vZ-sae"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内裤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IET-zI-dF7">
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <color key="backgroundColor" red="0.61084312080000003" green="1" blue="0.40381187079999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="IET-zI-dF7" firstAttribute="top" secondItem="ps5-vZ-sae" secondAttribute="bottom" id="7ba-ts-93D"/>
+                                    <constraint firstItem="ps5-vZ-sae" firstAttribute="width" secondItem="8Td-6I-mYe" secondAttribute="width" multiplier="2:3" id="AyM-eh-aRw"/>
+                                    <constraint firstAttribute="trailing" secondItem="IET-zI-dF7" secondAttribute="trailing" id="EZn-Tc-RIV"/>
+                                    <constraint firstItem="ps5-vZ-sae" firstAttribute="height" secondItem="8Td-6I-mYe" secondAttribute="height" multiplier="2:3" id="G7A-Qk-ARz"/>
+                                    <constraint firstAttribute="bottom" secondItem="IET-zI-dF7" secondAttribute="bottom" id="UwZ-AJ-EaR"/>
+                                    <constraint firstItem="IET-zI-dF7" firstAttribute="leading" secondItem="8Td-6I-mYe" secondAttribute="leading" id="cfa-tO-VgA"/>
+                                    <constraint firstItem="ps5-vZ-sae" firstAttribute="centerX" secondItem="8Td-6I-mYe" secondAttribute="centerX" id="l9H-Fr-Y03"/>
+                                    <constraint firstItem="ps5-vZ-sae" firstAttribute="centerY" secondItem="8Td-6I-mYe" secondAttribute="centerY" constant="-10" id="tXt-5G-YaS"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCell4" id="dJU-YZ-uEt">
+                                <rect key="frame" x="250" y="25" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="内衣" translatesAutoresizingMaskIntoConstraints="NO" id="aku-46-w0n"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内衣" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5f-s6-sS3">
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </view>
+                                <color key="backgroundColor" red="0.61084312080000003" green="1" blue="0.40381187079999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="aku-46-w0n" firstAttribute="centerX" secondItem="dJU-YZ-uEt" secondAttribute="centerX" id="0Fa-nV-r9w"/>
+                                    <constraint firstItem="aku-46-w0n" firstAttribute="width" secondItem="dJU-YZ-uEt" secondAttribute="width" multiplier="2:3" id="Ame-bP-WDO"/>
+                                    <constraint firstAttribute="bottom" secondItem="v5f-s6-sS3" secondAttribute="bottom" id="RvM-H9-co2"/>
+                                    <constraint firstItem="aku-46-w0n" firstAttribute="centerY" secondItem="dJU-YZ-uEt" secondAttribute="centerY" constant="-10" id="T5v-6l-0bU"/>
+                                    <constraint firstItem="v5f-s6-sS3" firstAttribute="leading" secondItem="dJU-YZ-uEt" secondAttribute="leading" id="TEz-ES-sLc"/>
+                                    <constraint firstItem="aku-46-w0n" firstAttribute="height" secondItem="dJU-YZ-uEt" secondAttribute="height" multiplier="2:3" id="UmD-cH-4l4"/>
+                                    <constraint firstAttribute="trailing" secondItem="v5f-s6-sS3" secondAttribute="trailing" id="ZH7-Ib-4MJ"/>
+                                    <constraint firstItem="v5f-s6-sS3" firstAttribute="top" secondItem="aku-46-w0n" secondAttribute="bottom" id="ikY-ja-Dbo"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="T5e-Wg-s2W" id="ITR-rd-xT3"/>
+                            <outlet property="delegate" destination="T5e-Wg-s2W" id="q3h-xr-CFB"/>
+                        </connections>
+                    </collectionView>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="100"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q6k-WZ-X5X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-98.400000000000006" y="304.94752623688157"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="内衣" width="250" height="200"/>
+        <image name="内裤" width="200" height="200"/>
+        <image name="短裤" width="200" height="200"/>
+        <image name="纸尿裤" width="200" height="200"/>
+        <image name="裤子" width="200" height="200"/>
+    </resources>
+</document>

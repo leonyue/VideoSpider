@@ -7,15 +7,86 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2AE4435DDF25AF35998C0E0F /* libPods-LeonYueTool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F418E398F1CF9AE9ABF83C4 /* libPods-LeonYueTool.a */; };
+		8D6B351C1D937F1F005915A3 /* LyTodayCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6B351B1D937F1F005915A3 /* LyTodayCollectionViewController.m */; };
+		8D6B351D1D937F1F005915A3 /* LyTodayCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6B351B1D937F1F005915A3 /* LyTodayCollectionViewController.m */; };
+		8D6B351F1D9381E7005915A3 /* todayExtension.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D6B351E1D9381E7005915A3 /* todayExtension.xcassets */; };
+		8D6B35201D9381E7005915A3 /* todayExtension.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D6B351E1D9381E7005915A3 /* todayExtension.xcassets */; };
+		8D7DF1511DB74744008D3D4C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7DF1501DB74744008D3D4C /* SystemConfiguration.framework */; };
+		8D7DF1531DB7474E008D3D4C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7DF1521DB7474E008D3D4C /* MobileCoreServices.framework */; };
+		8D7DF1561DB747DB008D3D4C /* VideoDownManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D7DF1551DB747DB008D3D4C /* VideoDownManager.m */; };
 		8DACFF701D93779A00FF8FEC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DACFF6F1D93779A00FF8FEC /* main.m */; };
 		8DACFF731D93779A00FF8FEC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DACFF721D93779A00FF8FEC /* AppDelegate.m */; };
 		8DACFF761D93779A00FF8FEC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DACFF751D93779A00FF8FEC /* ViewController.m */; };
 		8DACFF791D93779A00FF8FEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DACFF771D93779A00FF8FEC /* Main.storyboard */; };
 		8DACFF7B1D93779A00FF8FEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DACFF7A1D93779A00FF8FEC /* Assets.xcassets */; };
 		8DACFF7E1D93779A00FF8FEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DACFF7C1D93779A00FF8FEC /* LaunchScreen.storyboard */; };
+		8DACFF8C1D93790500FF8FEC /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DACFF8B1D93790500FF8FEC /* NotificationCenter.framework */; };
+		8DACFF931D93790500FF8FEC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DACFF911D93790500FF8FEC /* MainInterface.storyboard */; };
+		8DACFF971D93790500FF8FEC /* lyTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8DACFF891D93790500FF8FEC /* lyTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8DB4F86D1D98F7930071C07F /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4F86C1D98F7930071C07F /* ShareViewController.m */; };
+		8DB4F8701D98F7930071C07F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DB4F86E1D98F7930071C07F /* MainInterface.storyboard */; };
+		8DB4F8741D98F7930071C07F /* lyShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8DB4F8691D98F7930071C07F /* lyShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8DB4F8CE1D9908E30071C07F /* ActionRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DB4F8CD1D9908E30071C07F /* ActionRequestHandler.m */; };
+		8DB4F8D01D9908E30071C07F /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = 8DB4F8CF1D9908E30071C07F /* Action.js */; };
+		8DB4F8D41D9908E30071C07F /* lyActionExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8DB4F8CA1D9908E30071C07F /* lyActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8DDBFD0C1DB85AAD00F186B0 /* utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBFD0B1DB85AAD00F186B0 /* utility.m */; };
+		8DDBFD0D1DB85AAD00F186B0 /* utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBFD0B1DB85AAD00F186B0 /* utility.m */; };
+		8DDBFD0E1DB85AAD00F186B0 /* utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBFD0B1DB85AAD00F186B0 /* utility.m */; };
+		8DDBFD0F1DB85AAD00F186B0 /* utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBFD0B1DB85AAD00F186B0 /* utility.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8DACFF951D93790500FF8FEC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DACFF631D93779A00FF8FEC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DACFF881D93790500FF8FEC;
+			remoteInfo = lyTodayExtension;
+		};
+		8DB4F8721D98F7930071C07F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DACFF631D93779A00FF8FEC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DB4F8681D98F7930071C07F;
+			remoteInfo = lyShareExtension;
+		};
+		8DB4F8D21D9908E30071C07F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8DACFF631D93779A00FF8FEC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DB4F8C91D9908E30071C07F;
+			remoteInfo = lyActionExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DACFF9B1D93790500FF8FEC /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8DACFF971D93790500FF8FEC /* lyTodayExtension.appex in Embed App Extensions */,
+				8DB4F8741D98F7930071C07F /* lyShareExtension.appex in Embed App Extensions */,
+				8DB4F8D41D9908E30071C07F /* lyActionExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		29B3017A6E29D1D35F807960 /* Pods-LeonYueTool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeonYueTool.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeonYueTool/Pods-LeonYueTool.release.xcconfig"; sourceTree = "<group>"; };
+		7F418E398F1CF9AE9ABF83C4 /* libPods-LeonYueTool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LeonYueTool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D6B35191D937D15005915A3 /* GlobalDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalDefine.h; sourceTree = "<group>"; };
+		8D6B351A1D937F1F005915A3 /* LyTodayCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyTodayCollectionViewController.h; sourceTree = "<group>"; };
+		8D6B351B1D937F1F005915A3 /* LyTodayCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LyTodayCollectionViewController.m; sourceTree = "<group>"; };
+		8D6B351E1D9381E7005915A3 /* todayExtension.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = todayExtension.xcassets; sourceTree = "<group>"; };
+		8D7DF1501DB74744008D3D4C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8D7DF1521DB7474E008D3D4C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		8D7DF1541DB747DB008D3D4C /* VideoDownManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDownManager.h; sourceTree = "<group>"; };
+		8D7DF1551DB747DB008D3D4C /* VideoDownManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDownManager.m; sourceTree = "<group>"; };
 		8DACFF6B1D93779A00FF8FEC /* LeonYueTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeonYueTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DACFF6F1D93779A00FF8FEC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8DACFF711D93779A00FF8FEC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -26,10 +97,53 @@
 		8DACFF7A1D93779A00FF8FEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DACFF7D1D93779A00FF8FEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8DACFF7F1D93779A00FF8FEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DACFF891D93790500FF8FEC /* lyTodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = lyTodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DACFF8B1D93790500FF8FEC /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		8DACFF921D93790500FF8FEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		8DACFF941D93790500FF8FEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DB4F8691D98F7930071C07F /* lyShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = lyShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DB4F86B1D98F7930071C07F /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		8DB4F86C1D98F7930071C07F /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		8DB4F86F1D98F7930071C07F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		8DB4F8711D98F7930071C07F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DB4F8CA1D9908E30071C07F /* lyActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = lyActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DB4F8CC1D9908E30071C07F /* ActionRequestHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActionRequestHandler.h; sourceTree = "<group>"; };
+		8DB4F8CD1D9908E30071C07F /* ActionRequestHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActionRequestHandler.m; sourceTree = "<group>"; };
+		8DB4F8CF1D9908E30071C07F /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
+		8DB4F8D11D9908E30071C07F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DDBFD041DB85A6300F186B0 /* LeonYueTool.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeonYueTool.pch; sourceTree = "<group>"; };
+		8DDBFD0B1DB85AAD00F186B0 /* utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = utility.m; sourceTree = "<group>"; };
+		8DDBFD101DB85ABF00F186B0 /* utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utility.h; sourceTree = "<group>"; };
+		DC3D813429A8C8E54E99CD1D /* Pods-LeonYueTool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeonYueTool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeonYueTool/Pods-LeonYueTool.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		8DACFF681D93779A00FF8FEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D7DF1531DB7474E008D3D4C /* MobileCoreServices.framework in Frameworks */,
+				8D7DF1511DB74744008D3D4C /* SystemConfiguration.framework in Frameworks */,
+				2AE4435DDF25AF35998C0E0F /* libPods-LeonYueTool.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DACFF861D93790500FF8FEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DACFF8C1D93790500FF8FEC /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DB4F8661D98F7930071C07F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DB4F8C71D9908E30071C07F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,8 +156,14 @@
 		8DACFF621D93779A00FF8FEC = {
 			isa = PBXGroup;
 			children = (
+				8D6B35191D937D15005915A3 /* GlobalDefine.h */,
 				8DACFF6D1D93779A00FF8FEC /* LeonYueTool */,
+				8DACFF8D1D93790500FF8FEC /* lyTodayExtension */,
+				8DB4F86A1D98F7930071C07F /* lyShareExtension */,
+				8DB4F8CB1D9908E30071C07F /* lyActionExtension */,
+				8DACFF8A1D93790500FF8FEC /* Frameworks */,
 				8DACFF6C1D93779A00FF8FEC /* Products */,
+				E85F0C611066ECE960D5015A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -51,6 +171,9 @@
 			isa = PBXGroup;
 			children = (
 				8DACFF6B1D93779A00FF8FEC /* LeonYueTool.app */,
+				8DACFF891D93790500FF8FEC /* lyTodayExtension.appex */,
+				8DB4F8691D98F7930071C07F /* lyShareExtension.appex */,
+				8DB4F8CA1D9908E30071C07F /* lyActionExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -62,10 +185,15 @@
 				8DACFF721D93779A00FF8FEC /* AppDelegate.m */,
 				8DACFF741D93779A00FF8FEC /* ViewController.h */,
 				8DACFF751D93779A00FF8FEC /* ViewController.m */,
+				8D7DF1541DB747DB008D3D4C /* VideoDownManager.h */,
+				8D7DF1551DB747DB008D3D4C /* VideoDownManager.m */,
 				8DACFF771D93779A00FF8FEC /* Main.storyboard */,
 				8DACFF7A1D93779A00FF8FEC /* Assets.xcassets */,
 				8DACFF7C1D93779A00FF8FEC /* LaunchScreen.storyboard */,
 				8DACFF7F1D93779A00FF8FEC /* Info.plist */,
+				8DDBFD041DB85A6300F186B0 /* LeonYueTool.pch */,
+				8DDBFD101DB85ABF00F186B0 /* utility.h */,
+				8DDBFD0B1DB85AAD00F186B0 /* utility.m */,
 				8DACFF6E1D93779A00FF8FEC /* Supporting Files */,
 			);
 			path = LeonYueTool;
@@ -79,6 +207,60 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8DACFF8A1D93790500FF8FEC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8D7DF1521DB7474E008D3D4C /* MobileCoreServices.framework */,
+				8D7DF1501DB74744008D3D4C /* SystemConfiguration.framework */,
+				8DACFF8B1D93790500FF8FEC /* NotificationCenter.framework */,
+				7F418E398F1CF9AE9ABF83C4 /* libPods-LeonYueTool.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8DACFF8D1D93790500FF8FEC /* lyTodayExtension */ = {
+			isa = PBXGroup;
+			children = (
+				8DACFF911D93790500FF8FEC /* MainInterface.storyboard */,
+				8D6B351E1D9381E7005915A3 /* todayExtension.xcassets */,
+				8D6B351A1D937F1F005915A3 /* LyTodayCollectionViewController.h */,
+				8D6B351B1D937F1F005915A3 /* LyTodayCollectionViewController.m */,
+				8DACFF941D93790500FF8FEC /* Info.plist */,
+			);
+			path = lyTodayExtension;
+			sourceTree = "<group>";
+		};
+		8DB4F86A1D98F7930071C07F /* lyShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				8DB4F86B1D98F7930071C07F /* ShareViewController.h */,
+				8DB4F86C1D98F7930071C07F /* ShareViewController.m */,
+				8DB4F86E1D98F7930071C07F /* MainInterface.storyboard */,
+				8DB4F8711D98F7930071C07F /* Info.plist */,
+			);
+			path = lyShareExtension;
+			sourceTree = "<group>";
+		};
+		8DB4F8CB1D9908E30071C07F /* lyActionExtension */ = {
+			isa = PBXGroup;
+			children = (
+				8DB4F8CC1D9908E30071C07F /* ActionRequestHandler.h */,
+				8DB4F8CD1D9908E30071C07F /* ActionRequestHandler.m */,
+				8DB4F8CF1D9908E30071C07F /* Action.js */,
+				8DB4F8D11D9908E30071C07F /* Info.plist */,
+			);
+			path = lyActionExtension;
+			sourceTree = "<group>";
+		};
+		E85F0C611066ECE960D5015A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DC3D813429A8C8E54E99CD1D /* Pods-LeonYueTool.debug.xcconfig */,
+				29B3017A6E29D1D35F807960 /* Pods-LeonYueTool.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,18 +268,76 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8DACFF821D93779A00FF8FEC /* Build configuration list for PBXNativeTarget "LeonYueTool" */;
 			buildPhases = (
+				50215453927701CE52B5870D /* Check Pods Manifest.lock */,
 				8DACFF671D93779A00FF8FEC /* Sources */,
 				8DACFF681D93779A00FF8FEC /* Frameworks */,
 				8DACFF691D93779A00FF8FEC /* Resources */,
+				8DACFF9B1D93790500FF8FEC /* Embed App Extensions */,
+				6A08A1467CAB6570AD22DB55 /* Embed Pods Frameworks */,
+				68E850511E775CCAF98F2184 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8DACFF961D93790500FF8FEC /* PBXTargetDependency */,
+				8DB4F8731D98F7930071C07F /* PBXTargetDependency */,
+				8DB4F8D31D9908E30071C07F /* PBXTargetDependency */,
 			);
 			name = LeonYueTool;
 			productName = LeonYueTool;
 			productReference = 8DACFF6B1D93779A00FF8FEC /* LeonYueTool.app */;
 			productType = "com.apple.product-type.application";
+		};
+		8DACFF881D93790500FF8FEC /* lyTodayExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8DACFF981D93790500FF8FEC /* Build configuration list for PBXNativeTarget "lyTodayExtension" */;
+			buildPhases = (
+				8DACFF851D93790500FF8FEC /* Sources */,
+				8DACFF861D93790500FF8FEC /* Frameworks */,
+				8DACFF871D93790500FF8FEC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = lyTodayExtension;
+			productName = lyTodayExtension;
+			productReference = 8DACFF891D93790500FF8FEC /* lyTodayExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		8DB4F8681D98F7930071C07F /* lyShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8DB4F8751D98F7930071C07F /* Build configuration list for PBXNativeTarget "lyShareExtension" */;
+			buildPhases = (
+				8DB4F8651D98F7930071C07F /* Sources */,
+				8DB4F8661D98F7930071C07F /* Frameworks */,
+				8DB4F8671D98F7930071C07F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = lyShareExtension;
+			productName = lyShareExtension;
+			productReference = 8DB4F8691D98F7930071C07F /* lyShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		8DB4F8C91D9908E30071C07F /* lyActionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8DB4F8D51D9908E30071C07F /* Build configuration list for PBXNativeTarget "lyActionExtension" */;
+			buildPhases = (
+				8DB4F8C61D9908E30071C07F /* Sources */,
+				8DB4F8C71D9908E30071C07F /* Frameworks */,
+				8DB4F8C81D9908E30071C07F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = lyActionExtension;
+			productName = lyActionExtension;
+			productReference = 8DB4F8CA1D9908E30071C07F /* lyActionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -110,7 +350,22 @@
 				TargetAttributes = {
 					8DACFF6A1D93779A00FF8FEC = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = XJGKD4Z97L;
+						DevelopmentTeam = L9P52E65L5;
+						ProvisioningStyle = Automatic;
+					};
+					8DACFF881D93790500FF8FEC = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = L9P52E65L5;
+						ProvisioningStyle = Automatic;
+					};
+					8DB4F8681D98F7930071C07F = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = L9P52E65L5;
+						ProvisioningStyle = Automatic;
+					};
+					8DB4F8C91D9908E30071C07F = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = L9P52E65L5;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -129,6 +384,9 @@
 			projectRoot = "";
 			targets = (
 				8DACFF6A1D93779A00FF8FEC /* LeonYueTool */,
+				8DACFF881D93790500FF8FEC /* lyTodayExtension */,
+				8DB4F8681D98F7930071C07F /* lyShareExtension */,
+				8DB4F8C91D9908E30071C07F /* lyActionExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -139,25 +397,147 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DACFF7E1D93779A00FF8FEC /* LaunchScreen.storyboard in Resources */,
+				8D6B351F1D9381E7005915A3 /* todayExtension.xcassets in Resources */,
 				8DACFF7B1D93779A00FF8FEC /* Assets.xcassets in Resources */,
 				8DACFF791D93779A00FF8FEC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8DACFF871D93790500FF8FEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DACFF931D93790500FF8FEC /* MainInterface.storyboard in Resources */,
+				8D6B35201D9381E7005915A3 /* todayExtension.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DB4F8671D98F7930071C07F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DB4F8701D98F7930071C07F /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DB4F8C81D9908E30071C07F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DB4F8D01D9908E30071C07F /* Action.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		50215453927701CE52B5870D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		68E850511E775CCAF98F2184 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeonYueTool/Pods-LeonYueTool-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A08A1467CAB6570AD22DB55 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeonYueTool/Pods-LeonYueTool-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8DACFF671D93779A00FF8FEC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DDBFD0C1DB85AAD00F186B0 /* utility.m in Sources */,
 				8DACFF761D93779A00FF8FEC /* ViewController.m in Sources */,
 				8DACFF731D93779A00FF8FEC /* AppDelegate.m in Sources */,
 				8DACFF701D93779A00FF8FEC /* main.m in Sources */,
+				8D7DF1561DB747DB008D3D4C /* VideoDownManager.m in Sources */,
+				8D6B351C1D937F1F005915A3 /* LyTodayCollectionViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DACFF851D93790500FF8FEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DDBFD0D1DB85AAD00F186B0 /* utility.m in Sources */,
+				8D6B351D1D937F1F005915A3 /* LyTodayCollectionViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DB4F8651D98F7930071C07F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DDBFD0E1DB85AAD00F186B0 /* utility.m in Sources */,
+				8DB4F86D1D98F7930071C07F /* ShareViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8DB4F8C61D9908E30071C07F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8DDBFD0F1DB85AAD00F186B0 /* utility.m in Sources */,
+				8DB4F8CE1D9908E30071C07F /* ActionRequestHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8DACFF961D93790500FF8FEC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DACFF881D93790500FF8FEC /* lyTodayExtension */;
+			targetProxy = 8DACFF951D93790500FF8FEC /* PBXContainerItemProxy */;
+		};
+		8DB4F8731D98F7930071C07F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DB4F8681D98F7930071C07F /* lyShareExtension */;
+			targetProxy = 8DB4F8721D98F7930071C07F /* PBXContainerItemProxy */;
+		};
+		8DB4F8D31D9908E30071C07F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DB4F8C91D9908E30071C07F /* lyActionExtension */;
+			targetProxy = 8DB4F8D21D9908E30071C07F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8DACFF771D93779A00FF8FEC /* Main.storyboard */ = {
@@ -174,6 +554,22 @@
 				8DACFF7D1D93779A00FF8FEC /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8DACFF911D93790500FF8FEC /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8DACFF921D93790500FF8FEC /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		8DB4F86E1D98F7930071C07F /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8DB4F86F1D98F7930071C07F /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -271,25 +667,103 @@
 		};
 		8DACFF831D93779A00FF8FEC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC3D813429A8C8E54E99CD1D /* Pods-LeonYueTool.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = XJGKD4Z97L;
+				DEVELOPMENT_TEAM = L9P52E65L5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/LeonYueTool/LeonYueTool.pch";
 				INFOPLIST_FILE = LeonYueTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yuneec.LeonYueTool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		8DACFF841D93779A00FF8FEC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29B3017A6E29D1D35F807960 /* Pods-LeonYueTool.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = XJGKD4Z97L;
+				DEVELOPMENT_TEAM = L9P52E65L5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/LeonYueTool/LeonYueTool.pch";
 				INFOPLIST_FILE = LeonYueTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yuneec.LeonYueTool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8DACFF991D93790500FF8FEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = L9P52E65L5;
+				INFOPLIST_FILE = lyTodayExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool.lyTodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		8DACFF9A1D93790500FF8FEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = L9P52E65L5;
+				INFOPLIST_FILE = lyTodayExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool.lyTodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		8DB4F8761D98F7930071C07F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = L9P52E65L5;
+				INFOPLIST_FILE = lyShareExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool.lyShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		8DB4F8771D98F7930071C07F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = L9P52E65L5;
+				INFOPLIST_FILE = lyShareExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool.lyShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		8DB4F8D61D9908E30071C07F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = L9P52E65L5;
+				INFOPLIST_FILE = lyActionExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool.lyActionExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		8DB4F8D71D9908E30071C07F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = L9P52E65L5;
+				INFOPLIST_FILE = lyActionExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool.lyActionExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -312,6 +786,34 @@
 				8DACFF841D93779A00FF8FEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8DACFF981D93790500FF8FEC /* Build configuration list for PBXNativeTarget "lyTodayExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DACFF991D93790500FF8FEC /* Debug */,
+				8DACFF9A1D93790500FF8FEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8DB4F8751D98F7930071C07F /* Build configuration list for PBXNativeTarget "lyShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DB4F8761D98F7930071C07F /* Debug */,
+				8DB4F8771D98F7930071C07F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8DB4F8D51D9908E30071C07F /* Build configuration list for PBXNativeTarget "lyActionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DB4F8D61D9908E30071C07F /* Debug */,
+				8DB4F8D71D9908E30071C07F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

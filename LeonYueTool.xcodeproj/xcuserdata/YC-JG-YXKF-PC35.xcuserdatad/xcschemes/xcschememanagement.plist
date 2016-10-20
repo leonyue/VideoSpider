@@ -9,10 +9,60 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>lyActionExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>lyShareExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>lyTodayExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>8DACFF6A1D93779A00FF8FEC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8DACFF881D93790500FF8FEC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8DB4F8681D98F7930071C07F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8DB4F87B1D98FA140071C07F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8DB4F88E1D9907C00071C07F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8DB4F8A11D9908050071C07F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8DB4F8B61D9908BB0071C07F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8DB4F8C91D9908E30071C07F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
