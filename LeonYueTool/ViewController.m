@@ -29,6 +29,7 @@
                                                object:nil];
     NSString *rawUrlStr = @"http://ningbocouples.tumblr.com/post/125911497332/这个棒棒我喜欢";
     rawUrlStr = @"http://m.toutiao.com/a6341692131777708545/?iid=5920552262&app=news_article";
+    rawUrlStr = @"http://m.toutiao.com/a6344591133214556417/?iid=5920552262&app=news_article";
     self.urlTextField.text = rawUrlStr;
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -81,7 +82,6 @@
         return YES;
     }
     else {
-        NSLog(@"url:%@",request.URL);
         return NO;
     }
     
@@ -96,12 +96,5 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     
 }
-
-// 接收到服务器跳转请求之后调用
-//- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation
-//// 在收到响应后，决定是否跳转
-//- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler;
-//// 在发送请求之前，决定是否跳转
-//- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler;
 
 @end

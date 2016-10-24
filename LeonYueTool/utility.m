@@ -10,6 +10,9 @@
 #import "utility.h"
 
 NSString *randomFileName() {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd_HH:mm:ss:SSS"];
+    return [dateFormatter stringFromDate:[NSDate date]];
     
     return [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970]];
     

@@ -7,11 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "VideoDownloadResource.h"
+
+
+extern NSString *const LYNewResourceAddedNotification;
 
 @interface VideoDownManager : NSObject
 
-+ (id)sharedDownManager;
++ (VideoDownManager *)sharedDownManager;
 
-- (void)startVideoDownloadingFromURL:(NSURL *)url;
+
+@property (nonatomic, strong) NSMutableArray *videoResourceArray;
+
+- (VideoDownloadResource *)startVideoDownloadingFromURL:(NSURL *)url;
+- (void)pauseResourceDownload:(VideoDownloadResource *)resource;
+- (void)resumeResourceDownload:(VideoDownloadResource *)resource;
+- (void)deleteResource:(VideoDownloadResource *)resource;
 
 @end

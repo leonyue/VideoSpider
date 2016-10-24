@@ -11,12 +11,11 @@
 #import <AVKit/AVKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
-
+#import "VideoDownManager.h"
 static NSString *VideoCellIdentifier = @"VideoTableViewCell";
 
-@interface DownloadsViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface DownloadsViewController ()<UITableViewDelegate,UITableViewDataSource,AVPlayerViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
-@property (strong, nonatomic) NSMutableArray<NSString *> *videoFiles;
 
 @end
 
@@ -24,34 +23,97 @@ static NSString *VideoCellIdentifier = @"VideoTableViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resourceAdded:) name:LYNewResourceAddedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resourceModified:) name:LYNewResourceModifiedNotification object:nil];
     // Do any additional setup after loading the view.
+}
+
+- (void)resourceAdded:(NSNotification *)notif {
+    VideoDownloadResource *resource = notif.userInfo[@"resource"];
+    [[VideoDownManager sharedDownManager].videoResourceArray addObject:resource];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableview reloadData];
+    });
+    
+}
+
+- (void)resourceModified:(NSNotification *)notif {
+    VideoDownloadResource *resource = notif.object;
+    NSInteger row = [[VideoDownManager sharedDownManager].videoResourceArray indexOfObject:resource];
+    if (row != NSNotFound) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableview reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        });
+        
+        
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSError *error = nil;
-    NSLog(@"video path:%@",getVideoPath());
-    self.videoFiles = [NSMutableArray arrayWithArray:[[NSFileManager defaultManager] contentsOfDirectoryAtPath:getVideoPath() error:&error]];
-    NSLog(@"videoFiles:%@",self.videoFiles);
-    [self.tableview reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.videoFiles.count;
+    return [VideoDownManager sharedDownManager].videoResourceArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:VideoCellIdentifier forIndexPath:indexPath];
-    cell.textLabel.text = self.videoFiles[indexPath.row];
+    VideoDownloadResource *resource = [VideoDownManager sharedDownManager].videoResourceArray[indexPath.row];
+    if ([cell.textLabel.text isEqualToString:resource.localFileName]) {
+        
+    }
+    else {
+        cell.textLabel.text = resource.localFileName;
+    }
+    
+    switch (resource.video_status) {
+        case VideoStatusDownloading:
+            cell.backgroundColor = [UIColor whiteColor];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"progress:%.3f",resource.progress];
+            break;
+        case VideoStatusDownloaded:
+            cell.backgroundColor = [UIColor greenColor];
+            cell.detailTextLabel.text = @"";
+            break;
+        case VideoStatusPaused:
+            cell.backgroundColor = [UIColor yellowColor];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"progress:%.3f",resource.progress];
+            break;
+        case VideoStatusFailed:
+            cell.backgroundColor = [UIColor redColor];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"download failed"];
+            break;
+        case VideoStatusDeleted:
+            cell.backgroundColor = [UIColor redColor];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"resource deleted"];
+            break;
+        default:
+            break;
+    }
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    AVPlayerViewController *controller = [[AVPlayerViewController alloc] init];
-    controller.player = [[AVPlayer alloc] initWithURL:[NSURL fileURLWithPath:[getVideoPath() stringByAppendingPathComponent:self.videoFiles[indexPath.row]]]];
-    [self presentViewController:controller animated:YES completion:^{
-        [controller.player play];
-    }];
+    VideoDownloadResource *resource = [VideoDownManager sharedDownManager].videoResourceArray[indexPath.row];
+    if (resource.video_status == VideoStatusDownloaded) {
+        NSURL *url = [resource getTargetFileUrl];
+        AVPlayerViewController *controller = [[AVPlayerViewController alloc] init];
+        controller.player = [[AVPlayer alloc] initWithURL:url];
+        controller.delegate = self;
+        [self presentViewController:controller animated:YES completion:^{
+            [controller.player play];
+        }];
+    }
+    else if (resource.video_status == VideoStatusDownloading) {
+        [[VideoDownManager sharedDownManager] pauseResourceDownload:resource];
+    }
+    else if (resource.video_status == VideoStatusPaused) {
+        [[VideoDownManager sharedDownManager] resumeResourceDownload:resource];
+    }
+    else if (resource.video_status == VideoStatusFailed) {
+        [[VideoDownManager sharedDownManager] resumeResourceDownload:resource];
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -63,23 +125,26 @@ static NSString *VideoCellIdentifier = @"VideoTableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [[NSFileManager defaultManager] removeItemAtPath:[getVideoPath() stringByAppendingPathComponent:self.videoFiles[indexPath.row]] error:nil];
-    [self.videoFiles removeObjectAtIndex:indexPath.row];
+    VideoDownloadResource *resource = [VideoDownManager sharedDownManager].videoResourceArray[indexPath.row];
+    [[VideoDownManager sharedDownManager] deleteResource:resource];
+    [[VideoDownManager sharedDownManager].videoResourceArray removeObjectAtIndex:indexPath.row];
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
 - (IBAction)export:(id)sender {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         dispatch_group_t group = dispatch_group_create();
-        for (NSString *vF in self.videoFiles) {
-            dispatch_group_enter(group);
-            [self save:[getVideoPath() stringByAppendingPathComponent:vF] block:^{
-                dispatch_group_leave(group);
-            }];
-            dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:[NSString stringWithFormat:@"export progress:%ld/%ld",[self.videoFiles indexOfObject:vF],self.videoFiles.count] duration:4.f position:CSToastPositionTop];
-            });
+        for (VideoDownloadResource *resource in [VideoDownManager sharedDownManager].videoResourceArray) {
             
+            if (resource.video_status == VideoStatusDownloaded) {
+                dispatch_group_enter(group);
+                [self save:[resource getTargetFileUrl] block:^{
+                    dispatch_group_leave(group);
+                }];
+                dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.view makeToast:[NSString stringWithFormat:@"export progress:%ld/%ld",[[VideoDownManager sharedDownManager].videoResourceArray indexOfObject:resource],[VideoDownManager sharedDownManager].videoResourceArray.count] duration:4.f position:CSToastPositionTop];
+                });
+            }
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.view makeToast:@"export finished" duration:4.f position:CSToastPositionTop];
@@ -91,9 +156,9 @@ static NSString *VideoCellIdentifier = @"VideoTableViewCell";
 
 }
 
-- (void)save:(NSString*)urlString block:(void(^)())complete{
+- (void)save:(NSURL*)url block:(void(^)())complete{
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    [library writeVideoAtPathToSavedPhotosAlbum:[NSURL fileURLWithPath:urlString]
+    [library writeVideoAtPathToSavedPhotosAlbum:url
                                 completionBlock:^(NSURL *assetURL, NSError *error) {
                                     if (error) {
                                         dispatch_async(dispatch_get_main_queue(), ^{

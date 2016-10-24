@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2AE4435DDF25AF35998C0E0F /* libPods-LeonYueTool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F418E398F1CF9AE9ABF83C4 /* libPods-LeonYueTool.a */; };
+		8D02FDB31DB89B3300248223 /* VideoResource.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8D02FDB11DB89B3300248223 /* VideoResource.xcdatamodeld */; };
+		8D02FDC61DB8A08900248223 /* VideoResourceCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D02FDC51DB8A08900248223 /* VideoResourceCoreDataManager.m */; };
+		8D02FDD01DB8A6ED00248223 /* VideoDownloadResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D02FDCF1DB8A6ED00248223 /* VideoDownloadResource.m */; };
+		8D02FDD51DB8B2EA00248223 /* VideoResource+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D02FDD21DB8B2EA00248223 /* VideoResource+CoreDataClass.m */; };
+		8D02FDD61DB8B2EA00248223 /* VideoResource+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D02FDD41DB8B2EA00248223 /* VideoResource+CoreDataProperties.m */; };
 		8D6B351C1D937F1F005915A3 /* LyTodayCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6B351B1D937F1F005915A3 /* LyTodayCollectionViewController.m */; };
 		8D6B351D1D937F1F005915A3 /* LyTodayCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6B351B1D937F1F005915A3 /* LyTodayCollectionViewController.m */; };
 		8D6B351F1D9381E7005915A3 /* todayExtension.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D6B351E1D9381E7005915A3 /* todayExtension.xcassets */; };
@@ -81,7 +86,16 @@
 /* Begin PBXFileReference section */
 		29B3017A6E29D1D35F807960 /* Pods-LeonYueTool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeonYueTool.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeonYueTool/Pods-LeonYueTool.release.xcconfig"; sourceTree = "<group>"; };
 		7F418E398F1CF9AE9ABF83C4 /* libPods-LeonYueTool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LeonYueTool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D6B35191D937D15005915A3 /* GlobalDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalDefine.h; sourceTree = "<group>"; };
+		8D02FDB21DB89B3300248223 /* VideoResource.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VideoResource.xcdatamodel; sourceTree = "<group>"; };
+		8D02FDC41DB8A08900248223 /* VideoResourceCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoResourceCoreDataManager.h; sourceTree = "<group>"; };
+		8D02FDC51DB8A08900248223 /* VideoResourceCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoResourceCoreDataManager.m; sourceTree = "<group>"; };
+		8D02FDCE1DB8A6ED00248223 /* VideoDownloadResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDownloadResource.h; sourceTree = "<group>"; };
+		8D02FDCF1DB8A6ED00248223 /* VideoDownloadResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDownloadResource.m; sourceTree = "<group>"; };
+		8D02FDD11DB8B2EA00248223 /* VideoResource+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VideoResource+CoreDataClass.h"; sourceTree = "<group>"; };
+		8D02FDD21DB8B2EA00248223 /* VideoResource+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VideoResource+CoreDataClass.m"; sourceTree = "<group>"; };
+		8D02FDD31DB8B2EA00248223 /* VideoResource+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "VideoResource+CoreDataProperties.h"; sourceTree = "<group>"; };
+		8D02FDD41DB8B2EA00248223 /* VideoResource+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "VideoResource+CoreDataProperties.m"; sourceTree = "<group>"; };
+		8D6B35191D937D15005915A3 /* GlobalDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobalDefine.h; path = ../GlobalDefine.h; sourceTree = "<group>"; };
 		8D6B351A1D937F1F005915A3 /* LyTodayCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LyTodayCollectionViewController.h; sourceTree = "<group>"; };
 		8D6B351B1D937F1F005915A3 /* LyTodayCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LyTodayCollectionViewController.m; sourceTree = "<group>"; };
 		8D6B351E1D9381E7005915A3 /* todayExtension.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = todayExtension.xcassets; sourceTree = "<group>"; };
@@ -159,10 +173,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D02FDC71DB8A14800248223 /* VideoCoreData */ = {
+			isa = PBXGroup;
+			children = (
+				8D02FDB11DB89B3300248223 /* VideoResource.xcdatamodeld */,
+				8D02FDD11DB8B2EA00248223 /* VideoResource+CoreDataClass.h */,
+				8D02FDD21DB8B2EA00248223 /* VideoResource+CoreDataClass.m */,
+				8D02FDD31DB8B2EA00248223 /* VideoResource+CoreDataProperties.h */,
+				8D02FDD41DB8B2EA00248223 /* VideoResource+CoreDataProperties.m */,
+				8D02FDC41DB8A08900248223 /* VideoResourceCoreDataManager.h */,
+				8D02FDC51DB8A08900248223 /* VideoResourceCoreDataManager.m */,
+			);
+			name = VideoCoreData;
+			sourceTree = "<group>";
+		};
 		8DACFF621D93779A00FF8FEC = {
 			isa = PBXGroup;
 			children = (
-				8D6B35191D937D15005915A3 /* GlobalDefine.h */,
 				8DACFF6D1D93779A00FF8FEC /* LeonYueTool */,
 				8DACFF8D1D93790500FF8FEC /* lyTodayExtension */,
 				8DB4F86A1D98F7930071C07F /* lyShareExtension */,
@@ -193,15 +220,19 @@
 				8DACFF751D93779A00FF8FEC /* ViewController.m */,
 				8D7DF1541DB747DB008D3D4C /* VideoDownManager.h */,
 				8D7DF1551DB747DB008D3D4C /* VideoDownManager.m */,
+				8D02FDCE1DB8A6ED00248223 /* VideoDownloadResource.h */,
+				8D02FDCF1DB8A6ED00248223 /* VideoDownloadResource.m */,
 				8DDBFD111DB8653D00F186B0 /* DownloadsViewController.h */,
 				8DDBFD121DB8653D00F186B0 /* DownloadsViewController.m */,
 				8DDBFD141DB865BC00F186B0 /* VideoTableViewCell.h */,
 				8DDBFD151DB865BC00F186B0 /* VideoTableViewCell.m */,
 				8DACFF771D93779A00FF8FEC /* Main.storyboard */,
+				8D02FDC71DB8A14800248223 /* VideoCoreData */,
 				8DACFF7A1D93779A00FF8FEC /* Assets.xcassets */,
 				8DACFF7C1D93779A00FF8FEC /* LaunchScreen.storyboard */,
 				8DACFF7F1D93779A00FF8FEC /* Info.plist */,
 				8DDBFD041DB85A6300F186B0 /* LeonYueTool.pch */,
+				8D6B35191D937D15005915A3 /* GlobalDefine.h */,
 				8DDBFD101DB85ABF00F186B0 /* utility.h */,
 				8DDBFD0B1DB85AAD00F186B0 /* utility.m */,
 				8DACFF6E1D93779A00FF8FEC /* Supporting Files */,
@@ -361,6 +392,7 @@
 					8DACFF6A1D93779A00FF8FEC = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = L9P52E65L5;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					8DACFF881D93790500FF8FEC = {
@@ -496,11 +528,16 @@
 				8DDBFD0C1DB85AAD00F186B0 /* utility.m in Sources */,
 				8DDBFD161DB865BC00F186B0 /* VideoTableViewCell.m in Sources */,
 				8DACFF761D93779A00FF8FEC /* ViewController.m in Sources */,
+				8D02FDD01DB8A6ED00248223 /* VideoDownloadResource.m in Sources */,
+				8D02FDD61DB8B2EA00248223 /* VideoResource+CoreDataProperties.m in Sources */,
 				8DDBFD131DB8653D00F186B0 /* DownloadsViewController.m in Sources */,
 				8DACFF731D93779A00FF8FEC /* AppDelegate.m in Sources */,
 				8DACFF701D93779A00FF8FEC /* main.m in Sources */,
+				8D02FDD51DB8B2EA00248223 /* VideoResource+CoreDataClass.m in Sources */,
+				8D02FDC61DB8A08900248223 /* VideoResourceCoreDataManager.m in Sources */,
 				8D7DF1561DB747DB008D3D4C /* VideoDownManager.m in Sources */,
 				8D6B351C1D937F1F005915A3 /* LyTodayCollectionViewController.m in Sources */,
+				8D02FDB31DB89B3300248223 /* VideoResource.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,6 +719,7 @@
 			baseConfigurationReference = DC3D813429A8C8E54E99CD1D /* Pods-LeonYueTool.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = L9P52E65L5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LeonYueTool/LeonYueTool.pch";
@@ -689,6 +727,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LeonYueTool-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -697,6 +738,7 @@
 			baseConfigurationReference = 29B3017A6E29D1D35F807960 /* Pods-LeonYueTool.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = L9P52E65L5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LeonYueTool/LeonYueTool.pch";
@@ -704,6 +746,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LeonYueTool-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -828,6 +872,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8D02FDB11DB89B3300248223 /* VideoResource.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8D02FDB21DB89B3300248223 /* VideoResource.xcdatamodel */,
+			);
+			currentVersion = 8D02FDB21DB89B3300248223 /* VideoResource.xcdatamodel */;
+			path = VideoResource.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8DACFF631D93779A00FF8FEC /* Project object */;
 }
