@@ -32,13 +32,16 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FxD-uf-zf2">
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="go"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="62P-k5-jBF"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1U-qn-pkv">
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="dTz-rD-yir"/>
+                                            <constraint firstAttribute="width" constant="50" id="dTz-rD-yir"/>
                                         </constraints>
-                                        <state key="normal" title="Go"/>
+                                        <state key="normal" title="Paste"/>
                                         <connections>
                                             <action selector="goButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5t5-3o-Cpd"/>
                                         </connections>
@@ -47,12 +50,12 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="J1U-qn-pkv" secondAttribute="trailing" constant="14" id="5YA-Iu-F2n"/>
-                                    <constraint firstItem="O8N-t1-ivO" firstAttribute="centerY" secondItem="HNl-Mx-jr4" secondAttribute="centerY" id="B6F-BI-UBt"/>
-                                    <constraint firstItem="FxD-uf-zf2" firstAttribute="centerY" secondItem="HNl-Mx-jr4" secondAttribute="centerY" id="EwN-gC-dol"/>
-                                    <constraint firstItem="J1U-qn-pkv" firstAttribute="centerY" secondItem="HNl-Mx-jr4" secondAttribute="centerY" id="HcH-02-TPp"/>
+                                    <constraint firstAttribute="bottom" secondItem="J1U-qn-pkv" secondAttribute="bottom" id="5nH-2U-jEr"/>
                                     <constraint firstItem="FxD-uf-zf2" firstAttribute="leading" secondItem="O8N-t1-ivO" secondAttribute="trailing" constant="14" id="Iou-S8-VGH"/>
                                     <constraint firstAttribute="height" constant="60" id="Mnf-Kj-xzX"/>
                                     <constraint firstItem="O8N-t1-ivO" firstAttribute="leading" secondItem="HNl-Mx-jr4" secondAttribute="leading" constant="14" id="Uhd-hd-lRa"/>
+                                    <constraint firstAttribute="bottom" secondItem="FxD-uf-zf2" secondAttribute="bottom" id="Zph-m9-lhh"/>
+                                    <constraint firstAttribute="bottom" secondItem="O8N-t1-ivO" secondAttribute="bottom" id="atH-aF-ASX"/>
                                     <constraint firstItem="J1U-qn-pkv" firstAttribute="leading" secondItem="FxD-uf-zf2" secondAttribute="trailing" constant="14" id="vdW-lo-t0g"/>
                                 </constraints>
                             </view>

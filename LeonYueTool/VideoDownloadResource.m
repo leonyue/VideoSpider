@@ -83,7 +83,7 @@ NSString *const LYNewResourceModifiedNotification = @"LYNewResourceModifiedNotif
     resource.localFileName = self.localFileName;
     resource.progress      = @(self.progress);
     resource.extension     = self.extension;
-    [[VideoResourceCoreDataManager sharedManager] saveContext];
+//    [[VideoResourceCoreDataManager sharedManager] saveContext];
 }
 
 - (void)updateToDB {
@@ -101,7 +101,7 @@ NSString *const LYNewResourceModifiedNotification = @"LYNewResourceModifiedNotif
         resource.progress      = @(self.progress);
         resource.extension     = self.extension;
     }
-    [[VideoResourceCoreDataManager sharedManager] saveContext];
+//    [[VideoResourceCoreDataManager sharedManager] saveContext];
 }
 
 - (void)setVideo_url:(NSString *)video_url {

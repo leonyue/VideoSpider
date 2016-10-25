@@ -11,7 +11,7 @@
 #import "VideoDownManager.h"
 #import <WebKit/WebKit.h>
 
-@interface ViewController ()<UIWebViewDelegate>
+@interface ViewController ()<UIWebViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UITextField *urlTextField;
 @property (strong, nonatomic) NSMutableArray *tmpDownloadingArray;
@@ -30,6 +30,7 @@
     NSString *rawUrlStr = @"http://ningbocouples.tumblr.com/post/125911497332/这个棒棒我喜欢";
     rawUrlStr = @"http://m.toutiao.com/a6341692131777708545/?iid=5920552262&app=news_article";
     rawUrlStr = @"http://m.toutiao.com/a6344591133214556417/?iid=5920552262&app=news_article";
+    rawUrlStr = @"";
     self.urlTextField.text = rawUrlStr;
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -39,6 +40,7 @@
     [self.webView goBack];
 }
 - (IBAction)goButtonClick:(id)sender {
+    self.urlTextField.text = [UIPasteboard generalPasteboard].string;
     NSString *rawUrlStr = [self.urlTextField text];
     NSString *urlStr = [rawUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [self.webView loadRequest:
@@ -47,6 +49,19 @@
        ]
       ]
      ];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    NSString *rawUrlStr = [self.urlTextField text];
+    NSString *urlStr = [rawUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    [self.webView loadRequest:
+     [NSURLRequest requestWithURL:
+      [NSURL URLWithString:urlStr
+       ]
+      ]
+     ];
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (void)playerItemBecameCurrent:(NSNotification*)notification

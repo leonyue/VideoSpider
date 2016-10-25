@@ -39,10 +39,18 @@ static NSString *VideoCellIdentifier = @"VideoTableViewCell";
 
 - (void)resourceModified:(NSNotification *)notif {
     VideoDownloadResource *resource = notif.object;
-    NSInteger row = [[VideoDownManager sharedDownManager].videoResourceArray indexOfObject:resource];
+    NSArray *array = [VideoDownManager sharedDownManager].videoResourceArray;
+    NSInteger row = [array indexOfObject:resource];
     if (row != NSNotFound) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableview reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            @try {
+                [self.tableview reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            } @catch (NSException *exception) {
+                NSLog(@"exception:%@",exception);
+            } @finally {
+                
+            }
+            
         });
         
         

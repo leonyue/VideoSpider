@@ -8,6 +8,12 @@
 
 #import "VideoResourceCoreDataManager.h"
 
+@interface VideoResourceCoreDataManager ()
+
+
+
+@end
+
 @implementation VideoResourceCoreDataManager
 
 @synthesize managedObjectContext = __managedObjectContext;
@@ -26,14 +32,15 @@ static VideoResourceCoreDataManager *_sharedManger = nil;
 
 - (void)saveContext
 {
-    NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSError *error = nil;
+        BOOL ret = [self.managedObjectContext save:&error];
+        if (!ret || error != nil) {
+            NSLog(@"save fail:%@",error);
         }
-    }
+    });
+
+
 }
 
 - (NSURL *)applicationDocumentsDirectory

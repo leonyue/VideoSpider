@@ -39,12 +39,12 @@ void deleteFile(NSURL * file){
 
 - (void)setUp {
     self.downLoadTasks = [NSMutableArray new];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationwilldEnterBackground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWllEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
-- (void)applicationWllEnterForeground:(NSNotification *)notif {
+- (void)applicationDidBecomeActive:(NSNotification *)notif {
     for (VideoDownloadResource *resource  in self.videoResourceArray) {
         if (resource.video_status == VideoStatusPaused) {
             [self resumeResourceDownload:resource];
@@ -53,12 +53,13 @@ void deleteFile(NSURL * file){
     
 }
 
-- (void)applicationwilldEnterBackground:(NSNotification *)notif {
+- (void)applicationWillResignActive:(NSNotification *)notif {
     for (VideoDownloadResource *resource  in self.videoResourceArray) {
-        if (resource.video_status == VideoStatusPaused) {
+        if (resource.video_status == VideoStatusDownloading) {
             [self pauseResourceDownload:resource];
         }
     }
+    [[VideoResourceCoreDataManager sharedManager] saveContext];
     
 }
 
@@ -68,6 +69,7 @@ void deleteFile(NSURL * file){
             [self pauseResourceDownload:resource];
         }
     }
+    [[VideoResourceCoreDataManager sharedManager] saveContext];
 }
 
 - (VideoDownloadResource *)startVideoDownloadingFromURL:(NSURL *)url {
@@ -88,7 +90,9 @@ void deleteFile(NSURL * file){
         return [resource getResumableFileUrl];
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
 //        response.MIMEType
-        
+        if (resource.video_status == VideoStatusPaused) {
+            return;
+        }
         [self.downLoadTasks removeObject:task];
         
         NSString *extension = @"Unknown";
@@ -124,21 +128,16 @@ void deleteFile(NSURL * file){
         
         resource.extension = extension;
         
-        if (filePath == nil) {
-            resource.video_status = VideoStatusFailed;
-            NSLog(@"downoad fail");
-            return;
-        }
-        
-        [[NSFileManager defaultManager] moveItemAtURL:filePath toURL:[resource getTargetFileUrl] error:nil];
-        
         if (error == nil) {
-            NSLog(@"success download");
-            resource.video_status = VideoStatusDownloaded;
-        }
-        else {
-            resource.video_status = VideoStatusFailed;
-            NSLog(@"downoad fail");
+            if (filePath != nil) {
+                [[NSFileManager defaultManager] moveItemAtURL:filePath toURL:[resource getTargetFileUrl] error:nil];
+                resource.video_status = VideoStatusDownloaded;
+            }
+            else {
+                resource.video_status = VideoStatusFailed;
+                NSLog(@"No File");
+            }
+            
         }
     }];
     resource.linkedTask = task;
@@ -186,6 +185,10 @@ void deleteFile(NSURL * file){
         NSLog(@"%p 暂停->继续",resource);
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         NSData *data = [NSData dataWithContentsOfURL:[resource getResumableFileUrl]];
+        if (data == nil) {
+            resource.video_status = VideoStatusFailed;
+            return;
+        }
         deleteFile([resource getResumableFileUrl]);
         NSURLSessionDownloadTask *task = [manager downloadTaskWithResumeData:data progress:^(NSProgress * _Nonnull downloadProgress) {
             resource.progress = downloadProgress.fractionCompleted;
@@ -193,7 +196,9 @@ void deleteFile(NSURL * file){
             return [resource getResumableFileUrl];
         } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
             //        response.MIMEType
-            
+            if (resource.video_status == VideoStatusPaused) {
+                return;
+            }
             [self.downLoadTasks removeObject:task];
             
             NSString *extension = @"Unknown";
@@ -229,17 +234,16 @@ void deleteFile(NSURL * file){
             
             resource.extension = extension;
             
-            if (error == nil && filePath == nil) {
-                resource.video_status = VideoStatusFailed;
-                NSLog(@"downoad fail");
-                return;
-            }
-            
-            [[NSFileManager defaultManager] moveItemAtURL:filePath toURL:[resource getTargetFileUrl] error:nil];
-            
             if (error == nil) {
-                NSLog(@"success download");
-                resource.video_status = VideoStatusDownloaded;
+                if (filePath != nil) {
+                    [[NSFileManager defaultManager] moveItemAtURL:filePath toURL:[resource getTargetFileUrl] error:nil];
+                    resource.video_status = VideoStatusDownloaded;
+                }
+                else {
+                    resource.video_status = VideoStatusFailed;
+                    NSLog(@"No File");
+                }
+                
             }
             else {
                 resource.video_status = VideoStatusFailed;
@@ -263,7 +267,9 @@ void deleteFile(NSURL * file){
             return [resource getResumableFileUrl];
         } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
             //        response.MIMEType
-            
+            if (resource.video_status == VideoStatusPaused) {
+                return;
+            }
             [self.downLoadTasks removeObject:task];
             
             NSString *extension = @"Unknown";
@@ -299,28 +305,22 @@ void deleteFile(NSURL * file){
             
             resource.extension = extension;
             
-            if (filePath == nil) {
-                resource.video_status = VideoStatusFailed;
-                NSLog(@"downoad fail");
-                return;
-            }
-            
-            [[NSFileManager defaultManager] moveItemAtURL:filePath toURL:[resource getTargetFileUrl] error:nil];
-            
             if (error == nil) {
-                NSLog(@"success download");
-                resource.video_status = VideoStatusDownloaded;
-            }
-            else {
-                resource.video_status = VideoStatusFailed;
-                NSLog(@"downoad fail");
+                if (filePath != nil) {
+                    [[NSFileManager defaultManager] moveItemAtURL:filePath toURL:[resource getTargetFileUrl] error:nil];
+                    resource.video_status = VideoStatusDownloaded;
+                }
+                else {
+                    resource.video_status = VideoStatusFailed;
+                    NSLog(@"No File");
+                }
+                
             }
         }];
         resource.linkedTask = task;
         resource.video_status = VideoStatusDownloading;
         [self.downLoadTasks addObject:task];
         [task resume];
-        [[NSNotificationCenter defaultCenter] postNotificationName:LYNewResourceAddedNotification object:self userInfo:@{@"resource":resource}];
     }
 }
 
@@ -362,7 +362,7 @@ void deleteFile(NSURL * file){
             for (VideoResource *res in result) {
                 [context deleteObject:res];
             }
-            [context save:&error];
+//            [[VideoResourceCoreDataManager sharedManager] saveContext];
         }
     }
     
