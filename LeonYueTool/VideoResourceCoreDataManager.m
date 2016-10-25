@@ -34,6 +34,9 @@ static VideoResourceCoreDataManager *_sharedManger = nil;
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         NSError *error = nil;
+        if (!self.managedObjectContext.hasChanges) {
+            return ;
+        }
         BOOL ret = [self.managedObjectContext save:&error];
         if (!ret || error != nil) {
             NSLog(@"save fail:%@",error);
@@ -55,7 +58,7 @@ static VideoResourceCoreDataManager *_sharedManger = nil;
     }
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (coordinator != nil) {
-        __managedObjectContext = [[NSManagedObjectContext alloc] init];
+        __managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         [__managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
     return __managedObjectContext;

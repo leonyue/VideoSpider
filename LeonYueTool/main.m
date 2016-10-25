@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
-#import "VideoDownManager.m"
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {

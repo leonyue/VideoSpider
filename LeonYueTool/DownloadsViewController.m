@@ -41,20 +41,45 @@ static NSString *VideoCellIdentifier = @"VideoTableViewCell";
     VideoDownloadResource *resource = notif.object;
     NSArray *array = [VideoDownManager sharedDownManager].videoResourceArray;
     NSInteger row = [array indexOfObject:resource];
-    if (row != NSNotFound) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            @try {
-                [self.tableview reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-            } @catch (NSException *exception) {
-                NSLog(@"exception:%@",exception);
-            } @finally {
-                
-            }
-            
-        });
-        
-        
+    NSArray *visibleIndexs = self.tableview.indexPathsForVisibleRows;
+    if (row == NSNotFound) {
+        return;
     }
+    [visibleIndexs enumerateObjectsUsingBlock:^(NSIndexPath *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.row == row) {
+            VideoTableViewCell *cell = [self.tableview cellForRowAtIndexPath:obj];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.textLabel.text = resource.localFileName;
+                switch (resource.video_status) {
+                    case VideoStatusDownloading:
+                        cell.backgroundColor = [UIColor whiteColor];
+                        cell.detailTextLabel.text = [NSString stringWithFormat:@"progress:%.3f",resource.progress];
+                        break;
+                    case VideoStatusDownloaded:
+                        cell.backgroundColor = [UIColor greenColor];
+                        cell.detailTextLabel.text = @"";
+                        break;
+                    case VideoStatusPaused:
+                        cell.backgroundColor = [UIColor yellowColor];
+                        cell.detailTextLabel.text = [NSString stringWithFormat:@"progress:%.3f",resource.progress];
+                        break;
+                    case VideoStatusFailed:
+                        cell.backgroundColor = [UIColor redColor];
+                        cell.detailTextLabel.text = [NSString stringWithFormat:@"download failed"];
+                        break;
+                    case VideoStatusDeleted:
+                        cell.backgroundColor = [UIColor redColor];
+                        cell.detailTextLabel.text = [NSString stringWithFormat:@"resource deleted"];
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            *stop = YES;
+        }
+        
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -68,12 +93,7 @@ static NSString *VideoCellIdentifier = @"VideoTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:VideoCellIdentifier forIndexPath:indexPath];
     VideoDownloadResource *resource = [VideoDownManager sharedDownManager].videoResourceArray[indexPath.row];
-    if ([cell.textLabel.text isEqualToString:resource.localFileName]) {
-        
-    }
-    else {
-        cell.textLabel.text = resource.localFileName;
-    }
+    cell.textLabel.text = resource.localFileName;
     
     switch (resource.video_status) {
         case VideoStatusDownloading:

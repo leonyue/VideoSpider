@@ -77,6 +77,7 @@ NSString *const LYNewResourceModifiedNotification = @"LYNewResourceModifiedNotif
 - (void)insertToDB {
     
     NSManagedObjectContext *context = [VideoResourceCoreDataManager sharedManager].managedObjectContext;
+    
     VideoResource *resource = [NSEntityDescription insertNewObjectForEntityForName:@"VideoResource" inManagedObjectContext:context];
     resource.video_url = self.video_url;
     resource.video_status = @(self.video_status);
@@ -91,16 +92,21 @@ NSString *const LYNewResourceModifiedNotification = @"LYNewResourceModifiedNotif
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"video_url=%@",self.video_url];
     request.predicate = predicate;
     NSManagedObjectContext *context = [VideoResourceCoreDataManager sharedManager].managedObjectContext;
-    NSError *error = nil;
-    NSArray *result = [context executeFetchRequest:request error:&error];
-    if (error == nil && result.count == 1) {
-        VideoResource *resource = result[0];
-        resource.video_url = self.video_url;
-        resource.video_status = @(self.video_status);
-        resource.localFileName = self.localFileName;
-        resource.progress      = @(self.progress);
-        resource.extension     = self.extension;
-    }
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSError *error = nil;
+        NSArray *result = [context executeFetchRequest:request error:&error];
+        if (error == nil && result.count == 1) {
+            VideoResource *resource = result[0];
+            resource.video_url = self.video_url;
+            resource.video_status = @(self.video_status);
+            resource.localFileName = self.localFileName;
+            resource.progress      = @(self.progress);
+            resource.extension     = self.extension;
+        }
+    });
+    
 //    [[VideoResourceCoreDataManager sharedManager] saveContext];
 }
 

@@ -24,6 +24,7 @@ void deleteFile(NSURL * file){
 @interface VideoDownManager ()
 
 @property (nonatomic,strong) NSMutableArray<NSURLSessionDownloadTask *>* downLoadTasks;
+@property (nonatomic,strong) NSTimer *saveContextTimer;
 @end
 
 @implementation VideoDownManager
@@ -39,6 +40,9 @@ void deleteFile(NSURL * file){
 
 - (void)setUp {
     self.downLoadTasks = [NSMutableArray new];
+    self.saveContextTimer = [NSTimer timerWithTimeInterval:1.f repeats:YES block:^(NSTimer * _Nonnull timer) {
+        [[VideoResourceCoreDataManager sharedManager] saveContext];
+    }];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -46,9 +50,10 @@ void deleteFile(NSURL * file){
 
 - (void)applicationDidBecomeActive:(NSNotification *)notif {
     for (VideoDownloadResource *resource  in self.videoResourceArray) {
-        if (resource.video_status == VideoStatusPaused) {
+        if (resource.video_status != VideoStatusDownloaded) {
             [self resumeResourceDownload:resource];
         }
+        
     }
     
 }
@@ -181,15 +186,11 @@ void deleteFile(NSURL * file){
 }
 
 - (void)resumeResourceDownload:(VideoDownloadResource *)resource {
-    if (resource.video_status == VideoStatusPaused) {
-        NSLog(@"%p 暂停->继续",resource);
+    NSData *data = [NSData dataWithContentsOfURL:[resource getResumableFileUrl]];
+    
+    if (data != nil) {
+        NSLog(@"%p ...->继续",resource);
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        NSData *data = [NSData dataWithContentsOfURL:[resource getResumableFileUrl]];
-        if (data == nil) {
-            resource.video_status = VideoStatusFailed;
-            return;
-        }
-        deleteFile([resource getResumableFileUrl]);
         NSURLSessionDownloadTask *task = [manager downloadTaskWithResumeData:data progress:^(NSProgress * _Nonnull downloadProgress) {
             resource.progress = downloadProgress.fractionCompleted;
         } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
@@ -199,6 +200,7 @@ void deleteFile(NSURL * file){
             if (resource.video_status == VideoStatusPaused) {
                 return;
             }
+            deleteFile([resource getResumableFileUrl]);
             [self.downLoadTasks removeObject:task];
             
             NSString *extension = @"Unknown";
@@ -255,8 +257,8 @@ void deleteFile(NSURL * file){
         [self.downLoadTasks addObject:task];
         [task resume];
     }
-    else if (resource.video_status == VideoStatusFailed || resource.video_status == VideoStatusDeleted || resource.video_status == VideoStatusDownloading){
-        NSLog(@"失败->继续");
+    else {
+        NSLog(@"重新继续");
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:resource.video_url]];
