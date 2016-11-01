@@ -210,8 +210,8 @@ static NSString *VideoCellIdentifier = @"VideoTableViewCell";
 }
 - (IBAction)deleteAll:(id)sender {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        dispatch_group_t group = dispatch_group_create();
-        for (VideoDownloadResource *resource in [VideoDownManager sharedDownManager].videoResourceArray) {
+        NSArray *resources = [[VideoDownManager sharedDownManager].videoResourceArray copy];
+        for (VideoDownloadResource *resource in resources) {
             [[VideoDownManager sharedDownManager] deleteResource:resource];
             [[VideoDownManager sharedDownManager].videoResourceArray removeObject:resource];
         }
