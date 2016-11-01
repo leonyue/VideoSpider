@@ -120,7 +120,16 @@ NSString *const LYNewResourceModifiedNotification = @"LYNewResourceModifiedNotif
 
 - (void)setLocalFileName:(NSString *)localFileName {
     if (![_localFileName isEqualToString:localFileName]) {
+        NSURL *preUrl = [self getTargetFileUrl];
         _localFileName = [localFileName copy];
+        NSURL *afterUrl = [self getTargetFileUrl];
+        if (self.video_status == VideoStatusDownloaded) {
+            NSError *error = nil;
+            [[NSFileManager defaultManager] moveItemAtURL:preUrl toURL:afterUrl error:&error];
+            if (error!=nil) {
+                NSLog(@"rename error:%@",error);
+            }
+        }
         [self updateToDB];
         [[NSNotificationCenter defaultCenter] postNotificationName:LYNewResourceModifiedNotification object:self];
     }

@@ -23,7 +23,7 @@ void deleteFile(NSURL * file){
 
 @interface VideoDownManager ()
 
-@property (nonatomic,strong) NSMutableArray<NSURLSessionDownloadTask *>* downLoadTasks;
+//@property (nonatomic,strong) NSMutableArray<NSURLSessionDownloadTask *>* downLoadTasks;
 @property (nonatomic,strong) NSTimer *saveContextTimer;
 @end
 
@@ -39,13 +39,17 @@ void deleteFile(NSURL * file){
 }
 
 - (void)setUp {
-    self.downLoadTasks = [NSMutableArray new];
+//    self.downLoadTasks = [NSMutableArray new];
     self.saveContextTimer = [NSTimer timerWithTimeInterval:1.f repeats:YES block:^(NSTimer * _Nonnull timer) {
         [[VideoResourceCoreDataManager sharedManager] saveContext];
     }];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+- (void)resumeAllResource {
+    [self applicationDidBecomeActive:nil];
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notif {
@@ -95,10 +99,11 @@ void deleteFile(NSURL * file){
         return [resource getResumableFileUrl];
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
 //        response.MIMEType
-        if (resource.video_status == VideoStatusPaused) {
-            return;
-        }
-        [self.downLoadTasks removeObject:task];
+//        if (resource.video_status == VideoStatusPaused) {
+//            return;
+//        }
+        
+//        [self.downLoadTasks removeObject:task];
         
         NSString *extension = @"Unknown";
         NSString *mime = [[response MIMEType] lowercaseString];
@@ -146,7 +151,7 @@ void deleteFile(NSURL * file){
         }
     }];
     resource.linkedTask = task;
-    [self.downLoadTasks addObject:task];
+//    [self.downLoadTasks addObject:task];
     [task resume];
     [[NSNotificationCenter defaultCenter] postNotificationName:LYNewResourceAddedNotification object:self userInfo:@{@"resource":resource}];
     return resource;
@@ -166,6 +171,7 @@ void deleteFile(NSURL * file){
 }
 
 - (void)deleteResource:(VideoDownloadResource *)resource {
+    deleteFile([resource getResumableFileUrl]);
     if (resource.video_status == VideoStatusDownloading) {
         [resource.linkedTask cancel];
         [self removeFromDB:resource];
@@ -197,11 +203,11 @@ void deleteFile(NSURL * file){
             return [resource getResumableFileUrl];
         } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
             //        response.MIMEType
-            if (resource.video_status == VideoStatusPaused) {
-                return;
-            }
-            deleteFile([resource getResumableFileUrl]);
-            [self.downLoadTasks removeObject:task];
+//            if (resource.video_status == VideoStatusPaused) {
+//                return;
+//            }
+//            deleteFile([resource getResumableFileUrl]);
+//            [self.downLoadTasks removeObject:task];
             
             NSString *extension = @"Unknown";
             NSString *mime = [[response MIMEType] lowercaseString];
@@ -254,7 +260,7 @@ void deleteFile(NSURL * file){
         }];
         resource.linkedTask = task;
         resource.video_status = VideoStatusDownloading;
-        [self.downLoadTasks addObject:task];
+//        [self.downLoadTasks addObject:task];
         [task resume];
     }
     else {
@@ -269,10 +275,11 @@ void deleteFile(NSURL * file){
             return [resource getResumableFileUrl];
         } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
             //        response.MIMEType
-            if (resource.video_status == VideoStatusPaused) {
-                return;
-            }
-            [self.downLoadTasks removeObject:task];
+//            deleteFile([resource getResumableFileUrl]);
+//            if (resource.video_status == VideoStatusPaused) {
+//                return;
+//            }
+//            [self.downLoadTasks removeObject:task];
             
             NSString *extension = @"Unknown";
             NSString *mime = [[response MIMEType] lowercaseString];
@@ -321,7 +328,7 @@ void deleteFile(NSURL * file){
         }];
         resource.linkedTask = task;
         resource.video_status = VideoStatusDownloading;
-        [self.downLoadTasks addObject:task];
+//        [self.downLoadTasks addObject:task];
         [task resume];
     }
 }

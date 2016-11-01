@@ -10,4 +10,6 @@
 
 @interface VideoTableViewCell : UITableViewCell
 
+@property (nonatomic, assign) double progress;
+
 @end

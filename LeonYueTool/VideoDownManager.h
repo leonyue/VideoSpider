@@ -23,5 +23,6 @@ extern NSString *const LYNewResourceAddedNotification;
 - (void)pauseResourceDownload:(VideoDownloadResource *)resource;
 - (void)resumeResourceDownload:(VideoDownloadResource *)resource;
 - (void)deleteResource:(VideoDownloadResource *)resource;
+- (void)resumeAllResource;
 
 @end

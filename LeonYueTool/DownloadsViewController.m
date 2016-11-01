@@ -14,7 +14,7 @@
 #import "VideoDownManager.h"
 static NSString *VideoCellIdentifier = @"VideoTableViewCell";
 
-@interface DownloadsViewController ()<UITableViewDelegate,UITableViewDataSource,AVPlayerViewControllerDelegate>
+@interface DownloadsViewController ()<UITableViewDelegate,UITableViewDataSource,AVPlayerViewControllerDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @end
@@ -25,6 +25,7 @@ static NSString *VideoCellIdentifier = @"VideoTableViewCell";
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resourceAdded:) name:LYNewResourceAddedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resourceModified:) name:LYNewResourceModifiedNotification object:nil];
+    [[VideoDownManager sharedDownManager] resumeAllResource];
     // Do any additional setup after loading the view.
 }
 
@@ -50,25 +51,26 @@ static NSString *VideoCellIdentifier = @"VideoTableViewCell";
             VideoTableViewCell *cell = [self.tableview cellForRowAtIndexPath:obj];
             dispatch_async(dispatch_get_main_queue(), ^{
                 cell.textLabel.text = resource.localFileName;
+                cell.progress = resource.progress;
                 switch (resource.video_status) {
                     case VideoStatusDownloading:
-                        cell.backgroundColor = [UIColor whiteColor];
+//                        cell.backgroundColor = [UIColor whiteColor];
                         cell.detailTextLabel.text = [NSString stringWithFormat:@"progress:%.3f",resource.progress];
                         break;
                     case VideoStatusDownloaded:
-                        cell.backgroundColor = [UIColor greenColor];
+//                        cell.backgroundColor = [UIColor greenColor];
                         cell.detailTextLabel.text = @"";
                         break;
                     case VideoStatusPaused:
-                        cell.backgroundColor = [UIColor yellowColor];
+//                        cell.backgroundColor = [UIColor yellowColor];
                         cell.detailTextLabel.text = [NSString stringWithFormat:@"progress:%.3f",resource.progress];
                         break;
                     case VideoStatusFailed:
-                        cell.backgroundColor = [UIColor redColor];
+//                        cell.backgroundColor = [UIColor redColor];
                         cell.detailTextLabel.text = [NSString stringWithFormat:@"download failed"];
                         break;
                     case VideoStatusDeleted:
-                        cell.backgroundColor = [UIColor redColor];
+//                        cell.backgroundColor = [UIColor redColor];
                         cell.detailTextLabel.text = [NSString stringWithFormat:@"resource deleted"];
                         break;
                     default:
@@ -84,6 +86,7 @@ static NSString *VideoCellIdentifier = @"VideoTableViewCell";
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -93,27 +96,29 @@ static NSString *VideoCellIdentifier = @"VideoTableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:VideoCellIdentifier forIndexPath:indexPath];
     VideoDownloadResource *resource = [VideoDownManager sharedDownManager].videoResourceArray[indexPath.row];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.detailTextLabel.backgroundColor = [UIColor clearColor];
     cell.textLabel.text = resource.localFileName;
-    
+    cell.progress = resource.progress;
     switch (resource.video_status) {
         case VideoStatusDownloading:
-            cell.backgroundColor = [UIColor whiteColor];
+//            cell.backgroundColor = [UIColor whiteColor];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"progress:%.3f",resource.progress];
             break;
         case VideoStatusDownloaded:
-            cell.backgroundColor = [UIColor greenColor];
+//            cell.backgroundColor = [UIColor greenColor];
             cell.detailTextLabel.text = @"";
             break;
         case VideoStatusPaused:
-            cell.backgroundColor = [UIColor yellowColor];
+//            cell.backgroundColor = [UIColor yellowColor];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"progress:%.3f",resource.progress];
             break;
         case VideoStatusFailed:
-            cell.backgroundColor = [UIColor redColor];
+//            cell.backgroundColor = [UIColor redColor];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"download failed"];
             break;
         case VideoStatusDeleted:
-            cell.backgroundColor = [UIColor redColor];
+//            cell.backgroundColor = [UIColor redColor];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"resource deleted"];
             break;
         default:
@@ -134,7 +139,27 @@ static NSString *VideoCellIdentifier = @"VideoTableViewCell";
         }];
     }
     else if (resource.video_status == VideoStatusDownloading) {
-        [[VideoDownManager sharedDownManager] pauseResourceDownload:resource];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"停止下载？" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *yesAction = nil;
+        {
+            UIAlertAction *actionYes = [UIAlertAction actionWithTitle:@"是" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [[VideoDownManager sharedDownManager] pauseResourceDownload:resource];
+            }];
+            yesAction = actionYes;
+        }
+        [alert addAction:yesAction];
+        
+        UIAlertAction *noAction = nil;
+        {
+            UIAlertAction *actionNo = [UIAlertAction actionWithTitle:@"否" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            }];
+            noAction = actionNo;
+        }
+        [alert addAction:noAction];
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+        
     }
     else if (resource.video_status == VideoStatusPaused) {
         [[VideoDownManager sharedDownManager] resumeResourceDownload:resource];
@@ -152,11 +177,53 @@ static NSString *VideoCellIdentifier = @"VideoTableViewCell";
     return UITableViewCellEditingStyleDelete;
 }
 
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        NSLog(@"删除");
+        VideoDownloadResource *resource = [VideoDownManager sharedDownManager].videoResourceArray[indexPath.row];
+        [[VideoDownManager sharedDownManager] deleteResource:resource];
+        [[VideoDownManager sharedDownManager].videoResourceArray removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }];
+    
+    UITableViewRowAction *action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"导出" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        NSLog(@"导出");
+        VideoDownloadResource *resource = [VideoDownManager sharedDownManager].videoResourceArray[indexPath.row];
+        [self save:[resource getTargetFileUrl] block:^{
+            [self.tableview reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }];
+    }];
+    action2.backgroundColor = [UIColor blueColor];
+    UITableViewRowAction *action3 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"重命名" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        NSLog(@"重命名");
+        [self renameIndexPath:indexPath];
+    }];
+    action3.backgroundColor = [UIColor blackColor];
+    return @[action1,action2,action3];
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     VideoDownloadResource *resource = [VideoDownManager sharedDownManager].videoResourceArray[indexPath.row];
     [[VideoDownManager sharedDownManager] deleteResource:resource];
     [[VideoDownManager sharedDownManager].videoResourceArray removeObjectAtIndex:indexPath.row];
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
+- (IBAction)deleteAll:(id)sender {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        dispatch_group_t group = dispatch_group_create();
+        for (VideoDownloadResource *resource in [VideoDownManager sharedDownManager].videoResourceArray) {
+            [[VideoDownManager sharedDownManager] deleteResource:resource];
+            [[VideoDownManager sharedDownManager].videoResourceArray removeObject:resource];
+        }
+        
+        [[NSFileManager defaultManager] removeItemAtPath:getVideoPath() error:nil];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableview reloadData];
+        });
+        
+        
+    });
 }
 - (IBAction)export:(id)sender {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -199,6 +266,33 @@ static NSString *VideoCellIdentifier = @"VideoTableViewCell";
                                     }
                                     complete();
                                 }];
+}
+
+- (void)renameIndexPath:(NSIndexPath *)indexPath {
+    VideoDownloadResource *resource = [VideoDownManager sharedDownManager].videoResourceArray[indexPath.row];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"重命名" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *textfield = alert.textFields[0];
+        NSString *text = textfield.text;
+        resource.localFileName = text;
+        [self.tableview reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self.tableview reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }]];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.text = resource.localFileName;
+        textField.delegate = self;
+    }];
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    UITextPosition *endDocument = textField.endOfDocument;
+    UITextPosition *start = textField.beginningOfDocument;
+    textField.selectedTextRange = [textField textRangeFromPosition:start toPosition:endDocument];
 }
 
 @end

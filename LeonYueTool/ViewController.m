@@ -40,7 +40,6 @@
     [self.webView goBack];
 }
 - (IBAction)goButtonClick:(id)sender {
-    self.urlTextField.text = [UIPasteboard generalPasteboard].string;
     NSString *rawUrlStr = [self.urlTextField text];
     NSString *urlStr = [rawUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     [self.webView loadRequest:
@@ -49,6 +48,10 @@
        ]
       ]
      ];
+}
+- (IBAction)pasteToGo:(id)sender {
+    self.urlTextField.text = [UIPasteboard generalPasteboard].string;
+    [self goButtonClick:nil];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
