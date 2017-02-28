@@ -34,7 +34,7 @@ extern NSString *const LYNewResourceModifiedNotification;
 @property (nonatomic, weak) NSURLSessionDownloadTask *linkedTask;
 
 - (NSURL *)getResumableFileUrl;
-
+- (NSURL *)getTempFileUrl;
 /**
  <#Description#>
 

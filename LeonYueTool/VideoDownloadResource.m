@@ -46,6 +46,10 @@ NSString *const LYNewResourceModifiedNotification = @"LYNewResourceModifiedNotif
 }
 
 - (NSURL *)getResumableFileUrl {
+    NSString *fileUrl = [getVideoPath() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.resume",self.localFileName]];
+    return [NSURL fileURLWithPath:fileUrl];
+}
+- (NSURL *)getTempFileUrl {
     NSString *fileUrl = [getVideoPath() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.tmp",self.localFileName]];
     return [NSURL fileURLWithPath:fileUrl];
 }

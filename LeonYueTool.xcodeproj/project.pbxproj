@@ -724,8 +724,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LeonYueTool/LeonYueTool.pch";
 				INFOPLIST_FILE = LeonYueTool/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuneec.tool2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "LeonYueTool-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -743,8 +744,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/LeonYueTool/LeonYueTool.pch";
 				INFOPLIST_FILE = LeonYueTool/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuneec.tool2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "LeonYueTool-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -757,7 +759,7 @@
 				DEVELOPMENT_TEAM = L9P52E65L5;
 				INFOPLIST_FILE = lyTodayExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool.lyTodayExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuneec.tool2.lyTodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -769,7 +771,7 @@
 				DEVELOPMENT_TEAM = L9P52E65L5;
 				INFOPLIST_FILE = lyTodayExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool.lyTodayExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuneec.tool2.lyTodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -781,7 +783,7 @@
 				DEVELOPMENT_TEAM = L9P52E65L5;
 				INFOPLIST_FILE = lyShareExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool.lyShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuneec.tool2.lyShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -793,7 +795,7 @@
 				DEVELOPMENT_TEAM = L9P52E65L5;
 				INFOPLIST_FILE = lyShareExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool.lyShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuneec.tool2.lyShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -805,7 +807,7 @@
 				DEVELOPMENT_TEAM = L9P52E65L5;
 				INFOPLIST_FILE = lyActionExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool.lyActionExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuneec.tool2.lyActionExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -817,7 +819,7 @@
 				DEVELOPMENT_TEAM = L9P52E65L5;
 				INFOPLIST_FILE = lyActionExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.leonyue.tool.lyActionExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuneec.tool2.lyActionExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

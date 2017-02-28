@@ -24,6 +24,7 @@ void deleteFile(NSURL * file){
 @interface VideoDownManager ()
 
 //@property (nonatomic,strong) NSMutableArray<NSURLSessionDownloadTask *>* downLoadTasks;
+@property (nonatomic,strong) AFHTTPSessionManager *bgManager;
 @property (nonatomic,strong) NSTimer *saveContextTimer;
 @end
 
@@ -48,42 +49,41 @@ void deleteFile(NSURL * file){
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
-- (void)resumeAllResource {
-    [self applicationDidBecomeActive:nil];
-}
+#pragma mark - 暂停&&继续下载
 
-- (void)applicationDidBecomeActive:(NSNotification *)notif {
+- (void)resumeAllResource {
     for (VideoDownloadResource *resource  in self.videoResourceArray) {
-        if (resource.video_status != VideoStatusDownloaded) {
+        if (resource.video_status != VideoStatusDownloaded && resource.video_status != VideoStatusDownloading) {
             [self resumeResourceDownload:resource];
         }
-        
     }
-    
+    [[VideoResourceCoreDataManager sharedManager] saveContext];
 }
 
-- (void)applicationWillResignActive:(NSNotification *)notif {
+- (void)pauseAllResource {
     for (VideoDownloadResource *resource  in self.videoResourceArray) {
         if (resource.video_status == VideoStatusDownloading) {
             [self pauseResourceDownload:resource];
         }
     }
     [[VideoResourceCoreDataManager sharedManager] saveContext];
+}
+
+#pragma mark - 应用程序状态通知
+- (void)applicationDidBecomeActive:(NSNotification *)notif {
+    [self resumeAllResource];
+}
+
+- (void)applicationWillResignActive:(NSNotification *)notif {
     
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notif {
-    for (VideoDownloadResource *resource  in self.videoResourceArray) {
-        if (resource.video_status == VideoStatusDownloading) {
-            [self pauseResourceDownload:resource];
-        }
-    }
-    [[VideoResourceCoreDataManager sharedManager] saveContext];
+    [self pauseAllResource];
 }
 
 - (VideoDownloadResource *)startVideoDownloadingFromURL:(NSURL *)url {
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-
+    AFHTTPSessionManager *manager = self.bgManager;
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     
@@ -93,62 +93,13 @@ void deleteFile(NSURL * file){
         return nil;
     }
     
+    __weak typeof(self) weakSelf = self;
     NSURLSessionDownloadTask *task = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
         resource.progress = downloadProgress.fractionCompleted;
     } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-        return [resource getResumableFileUrl];
+        return [resource getTempFileUrl];
     } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-//        response.MIMEType
-//        if (resource.video_status == VideoStatusPaused) {
-//            return;
-//        }
-        
-//        [self.downLoadTasks removeObject:task];
-        
-        NSString *extension = @"Unknown";
-        NSString *mime = [[response MIMEType] lowercaseString];
-        if ([mime isEqualToString:@"application/octet-stream"]) {
-            extension = @"flv";
-        }
-        else if ([mime isEqualToString:@"application/octet-stream"]) {
-            extension = @"f4v";
-        }
-        else if ([mime isEqualToString:@"video/mp4"]) {
-            extension = @"mp4";
-        }
-        else if ([mime isEqualToString:@"video/ogg"]) {
-            extension = @"ogv";
-        }
-        else if ([mime isEqualToString:@"video/webm"]) {
-            extension = @"webm";
-        }
-        else if ([mime isEqualToString:@"application/x-mpegurl"]) {
-            extension = @"M3U8";
-        }
-        else if ([mime isEqualToString:@"application/vnd.apple.mpegurl"]) {
-            extension = @"M3U8";
-        }
-        else if ([mime isEqualToString:@"video/mp2t"]) {
-            extension = @"ts";
-        }
-        
-        if ([extension isEqualToString:@"Unknown"]) {
-            [[UIApplication sharedApplication].keyWindow makeToast:[NSString stringWithFormat:@"unknown file format with MIME:%@",mime] duration:2.f position:CSToastPositionBottom];
-        }
-        
-        resource.extension = extension;
-        
-        if (error == nil) {
-            if (filePath != nil) {
-                [[NSFileManager defaultManager] moveItemAtURL:filePath toURL:[resource getTargetFileUrl] error:nil];
-                resource.video_status = VideoStatusDownloaded;
-            }
-            else {
-                resource.video_status = VideoStatusFailed;
-                NSLog(@"No File");
-            }
-            
-        }
+        [weakSelf finishDownloadingResource:resource :response :filePath :error];
     }];
     resource.linkedTask = task;
 //    [self.downLoadTasks addObject:task];
@@ -171,92 +122,31 @@ void deleteFile(NSURL * file){
 }
 
 - (void)deleteResource:(VideoDownloadResource *)resource {
-    deleteFile([resource getResumableFileUrl]);
     if (resource.video_status == VideoStatusDownloading) {
         [resource.linkedTask cancel];
-        [self removeFromDB:resource];
     }
-    else if (resource.video_status == VideoStatusFailed) {
-        [self removeFromDB:resource];
-    }
-    else if (resource.video_status == VideoStatusPaused) {
-        deleteFile([resource getResumableFileUrl]);
-        [self removeFromDB:resource];
-    }
-    else if (resource.video_status == VideoStatusDownloaded) {
-        deleteFile([resource getTargetFileUrl]);
-        resource.video_status = VideoStatusDeleted;
-    }
-    else if (resource.video_status == VideoStatusDeleted) {
-    }
+    deleteFile([resource getResumableFileUrl]);
+    deleteFile([resource getTempFileUrl]);
+    deleteFile([resource getTargetFileUrl]);
+    
+    resource.video_status = VideoStatusDeleted;
+    [self removeFromDB:resource];
+    [[VideoResourceCoreDataManager sharedManager] saveContext];
 }
 
 - (void)resumeResourceDownload:(VideoDownloadResource *)resource {
     NSData *data = [NSData dataWithContentsOfURL:[resource getResumableFileUrl]];
+    __weak typeof(self) weakSelf = self;
+    AFHTTPSessionManager *manager = self.bgManager;
     
     if (data != nil) {
         NSLog(@"%p ...->继续",resource);
-        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
         NSURLSessionDownloadTask *task = [manager downloadTaskWithResumeData:data progress:^(NSProgress * _Nonnull downloadProgress) {
             resource.progress = downloadProgress.fractionCompleted;
         } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-            return [resource getResumableFileUrl];
+            return [resource getTempFileUrl];
         } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-            //        response.MIMEType
-//            if (resource.video_status == VideoStatusPaused) {
-//                return;
-//            }
-//            deleteFile([resource getResumableFileUrl]);
-//            [self.downLoadTasks removeObject:task];
-            
-            NSString *extension = @"Unknown";
-            NSString *mime = [[response MIMEType] lowercaseString];
-            if ([mime isEqualToString:@"application/octet-stream"]) {
-                extension = @"flv";
-            }
-            else if ([mime isEqualToString:@"application/octet-stream"]) {
-                extension = @"f4v";
-            }
-            else if ([mime isEqualToString:@"video/mp4"]) {
-                extension = @"mp4";
-            }
-            else if ([mime isEqualToString:@"video/ogg"]) {
-                extension = @"ogv";
-            }
-            else if ([mime isEqualToString:@"video/webm"]) {
-                extension = @"webm";
-            }
-            else if ([mime isEqualToString:@"application/x-mpegurl"]) {
-                extension = @"M3U8";
-            }
-            else if ([mime isEqualToString:@"application/vnd.apple.mpegurl"]) {
-                extension = @"M3U8";
-            }
-            else if ([mime isEqualToString:@"video/mp2t"]) {
-                extension = @"ts";
-            }
-            
-            if ([extension isEqualToString:@"Unknown"]) {
-                [[UIApplication sharedApplication].keyWindow makeToast:[NSString stringWithFormat:@"unknown file format with MIME:%@",mime] duration:2.f position:CSToastPositionBottom];
-            }
-            
-            resource.extension = extension;
-            
-            if (error == nil) {
-                if (filePath != nil) {
-                    [[NSFileManager defaultManager] moveItemAtURL:filePath toURL:[resource getTargetFileUrl] error:nil];
-                    resource.video_status = VideoStatusDownloaded;
-                }
-                else {
-                    resource.video_status = VideoStatusFailed;
-                    NSLog(@"No File");
-                }
-                
-            }
-            else {
-                resource.video_status = VideoStatusFailed;
-                NSLog(@"downoad fail");
-            }
+            [weakSelf finishDownloadingResource:resource :response :filePath :error];
         }];
         resource.linkedTask = task;
         resource.video_status = VideoStatusDownloading;
@@ -265,66 +155,15 @@ void deleteFile(NSURL * file){
     }
     else {
         NSLog(@"重新继续");
-        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:resource.video_url]];
         
+        __weak typeof(self) weakSelf = self;
         NSURLSessionDownloadTask *task = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
             resource.progress = downloadProgress.fractionCompleted;
         } destination:^NSURL * _Nonnull(NSURL * _Nonnull targetPath, NSURLResponse * _Nonnull response) {
-            return [resource getResumableFileUrl];
+            return [resource getTempFileUrl];
         } completionHandler:^(NSURLResponse * _Nonnull response, NSURL * _Nullable filePath, NSError * _Nullable error) {
-            //        response.MIMEType
-//            deleteFile([resource getResumableFileUrl]);
-//            if (resource.video_status == VideoStatusPaused) {
-//                return;
-//            }
-//            [self.downLoadTasks removeObject:task];
-            
-            NSString *extension = @"Unknown";
-            NSString *mime = [[response MIMEType] lowercaseString];
-            if ([mime isEqualToString:@"application/octet-stream"]) {
-                extension = @"flv";
-            }
-            else if ([mime isEqualToString:@"application/octet-stream"]) {
-                extension = @"f4v";
-            }
-            else if ([mime isEqualToString:@"video/mp4"]) {
-                extension = @"mp4";
-            }
-            else if ([mime isEqualToString:@"video/ogg"]) {
-                extension = @"ogv";
-            }
-            else if ([mime isEqualToString:@"video/webm"]) {
-                extension = @"webm";
-            }
-            else if ([mime isEqualToString:@"application/x-mpegurl"]) {
-                extension = @"M3U8";
-            }
-            else if ([mime isEqualToString:@"application/vnd.apple.mpegurl"]) {
-                extension = @"M3U8";
-            }
-            else if ([mime isEqualToString:@"video/mp2t"]) {
-                extension = @"ts";
-            }
-            
-            if ([extension isEqualToString:@"Unknown"]) {
-                [[UIApplication sharedApplication].keyWindow makeToast:[NSString stringWithFormat:@"unknown file format with MIME:%@",mime] duration:2.f position:CSToastPositionBottom];
-            }
-            
-            resource.extension = extension;
-            
-            if (error == nil) {
-                if (filePath != nil) {
-                    [[NSFileManager defaultManager] moveItemAtURL:filePath toURL:[resource getTargetFileUrl] error:nil];
-                    resource.video_status = VideoStatusDownloaded;
-                }
-                else {
-                    resource.video_status = VideoStatusFailed;
-                    NSLog(@"No File");
-                }
-                
-            }
+            [weakSelf finishDownloadingResource:resource :response :filePath :error];
         }];
         resource.linkedTask = task;
         resource.video_status = VideoStatusDownloading;
@@ -334,11 +173,88 @@ void deleteFile(NSURL * file){
 }
 
 
+- (void)finishDownloadingResource:(VideoDownloadResource *)resource
+                                 :(NSURLResponse * _Nonnull)response
+                                 :(NSURL * _Nullable)filePath
+                                 :(NSError * _Nullable)error {
+    NSString *extension = @"Unknown";
+    NSString *mime = [[response MIMEType] lowercaseString];
+    if ([mime isEqualToString:@"application/octet-stream"]) {
+        extension = @"flv";
+    }
+    else if ([mime isEqualToString:@"application/octet-stream"]) {
+        extension = @"f4v";
+    }
+    else if ([mime isEqualToString:@"video/mp4"]) {
+        extension = @"mp4";
+    }
+    else if ([mime isEqualToString:@"video/ogg"]) {
+        extension = @"ogv";
+    }
+    else if ([mime isEqualToString:@"video/webm"]) {
+        extension = @"webm";
+    }
+    else if ([mime isEqualToString:@"application/x-mpegurl"]) {
+        extension = @"M3U8";
+    }
+    else if ([mime isEqualToString:@"application/vnd.apple.mpegurl"]) {
+        extension = @"M3U8";
+    }
+    else if ([mime isEqualToString:@"video/mp2t"]) {
+        extension = @"ts";
+    }
+    
+    if ([extension isEqualToString:@"Unknown"]) {
+        [[UIApplication sharedApplication].keyWindow makeToast:[NSString stringWithFormat:@"unknown file format with MIME:%@",mime] duration:2.f position:CSToastPositionBottom];
+    }
+    
+    resource.extension = extension;
+    if (error == nil) {
+        if (filePath != nil) {
+            NSError *err = nil;
+            BOOL success = [[NSFileManager defaultManager] moveItemAtURL:filePath toURL:[resource getTargetFileUrl] error:&err];
+            if (success && err == nil) {
+                resource.video_status = VideoStatusDownloaded;
+            }
+            else {
+                resource.video_status = VideoStatusFailed;
+                NSLog(@"Move file fail:%@",err.localizedDescription);
+            }
+        }
+        else {
+            resource.video_status = VideoStatusFailed;
+            NSLog(@"No File");
+        }
+    }
+    else {
+        if (error.code == -999) {
+            resource.video_status = VideoStatusPaused;
+        }
+        else {
+            resource.video_status = VideoStatusFailed;
+            NSLog(@"Download file fail:%@",error.localizedDescription);
+        }
+        
+    }
+    [[VideoResourceCoreDataManager sharedManager] saveContext];
+}
+
 - (NSArray *)videoResourceArray {
     if (nil == _videoResourceArray) {
         _videoResourceArray = [NSMutableArray arrayWithArray:[self getAllVideoResourcesExceptDeleted]];
     }
     return _videoResourceArray;
+}
+
+#pragma mark - lazy
+
+- (AFHTTPSessionManager *)bgManager {
+    if (_bgManager == nil) {
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"com.leony.tool.background_download"];
+        config.discretionary = YES;
+        _bgManager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:config];
+    }
+    return _bgManager;
 }
 
 #pragma mark - core data
@@ -371,7 +287,7 @@ void deleteFile(NSURL * file){
             for (VideoResource *res in result) {
                 [context deleteObject:res];
             }
-//            [[VideoResourceCoreDataManager sharedManager] saveContext];
+            [[VideoResourceCoreDataManager sharedManager] saveContext];
         }
     }
     

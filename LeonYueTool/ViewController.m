@@ -30,7 +30,7 @@
     NSString *rawUrlStr = @"http://ningbocouples.tumblr.com/post/125911497332/这个棒棒我喜欢";
     rawUrlStr = @"http://m.toutiao.com/a6341692131777708545/?iid=5920552262&app=news_article";
     rawUrlStr = @"http://m.toutiao.com/a6344591133214556417/?iid=5920552262&app=news_article";
-    rawUrlStr = @"";
+//    rawUrlStr = @"";
     self.urlTextField.text = rawUrlStr;
     
     // Do any additional setup after loading the view, typically from a nib.
